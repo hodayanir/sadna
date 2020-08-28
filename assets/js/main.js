@@ -3,6 +3,8 @@
   
 /* 1. Proloder */
     $(window).on('load', function () {
+      $("#header-wrapper").load("header_footer.html #header");
+      $("#footer-wrapper").load("header_footer.html #footer");
       $('#preloader-active').delay(450).fadeOut('slow');
       $('body').delay(450).css({
         'overflow': 'visible'

@@ -1,0 +1,151 @@
+/*-- FOR INDEX --*/
+html, body{
+  width:100%;
+  height:100%;
+  font-family:oxygen;
+  margin:0;
+}
+body{
+  display:grid;
+  grid-template-areas: "nav nav nav"
+                       ". main ."
+                       "footer footer footer";
+}
+#indexmain{
+  grid-area: main;
+  margin:auto;
+  border-radius:1vmax;
+  box-shadow: 0px 0px 2vmin 0px rgba(0,0,0,0.3);
+  color: #9098a9;
+}
+nav{
+  grid-area:nav;
+  padding:2vmin 3vmin;
+  background-color:rgb(216, 226, 243);
+  color:white;
+  font-size:2vmax;
+  display:flex;
+  justify-content:space-between;
+}
+
+#loginwindow{
+  margin:3vmax;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+}
+#logincontainer
+{
+  display:grid;
+}
+.confirmbuttonbox{
+  margin:2vmax;
+  display:flex;
+  justify-content:center;
+  align-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.confirmbutton{
+  align-self: center;
+  margin:1vmin;
+  border:1px solid;
+  border-color: #07f;;
+  border-radius:2vmin;
+  color: #07f;
+  padding:2vmin 3vmin;
+  font-size:inherit;
+  background-color:white;
+  transition-duration:0.2s;
+}
+.confirmbutton:hover{
+  background-color:  #07f;
+  color:white;
+  border-color: #07f;
+  cursor:pointer;
+}
+footer{
+    grid-area:footer;
+    padding:3vmin;
+    background-color:rgb(216, 226, 243);
+  }
+/* ---- INPUT BOXES EFFECT ---- */
+* {
+  box-sizing: border-box;
+}
+.inp {
+  position: relative;
+  margin: auto;
+  width: 100%;
+  max-width: 280px;
+}
+.inp .label {
+  position: absolute;
+  top: 16px;
+  left: 0;
+  font-size: 16px;
+  color: #9098a9;
+  font-weight: 500;
+  transform-origin: 0 0;
+  transition: all 0.2s ease;
+}
+.inp .border {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background: #07f;
+  transform: scaleX(0);
+  transform-origin: 0 0;
+  transition: all 0.15s ease;
+}
+.inp input {
+  -webkit-appearance: none;
+  width: 100%;
+  border: 0;
+  font-family: inherit;
+  padding: 12px 0;
+  height: 48px;
+  font-size: 16px;
+  font-weight: 500;
+  border-bottom: 2px solid #c8ccd4;
+  background: none;
+  border-radius: 0;
+  color: #223254;
+  transition: all 0.15s ease;
+}
+.inp input:hover {
+  background: rgba(34,50,84,0.03);
+}
+.inp input:not(:placeholder-shown) + span {
+  color: #5a667f;
+  transform: translateY(-26px) scale(0.75);
+}
+.inp input:focus {
+  background: none;
+  outline: none;
+}
+.inp input:focus + span {
+  color: #07f;
+  transform: translateY(-26px) scale(0.75);
+}
+.inp input:focus + span + .border {
+  transform: scaleX(1);
+}
+  /* --------------- */
+
+
+
+  /* WHEN ON MOBILE: */
+@media only screen and (orientation: portrait) {
+  nav {display: none;}
+  footer {display: none;}
+  #indexmain{
+    width:100%;
+    height:100%;
+  }
+}
+  /* --------------- */

@@ -1,0 +1,160 @@
+
+html, body{
+    width:100%;
+    height:100%;
+    font-family:oxygen;
+    margin:0;
+}
+body{
+    display:grid;
+    grid-template-rows: repeat(6,1fr);
+    grid-template-columns: repeat(6,1fr);
+    grid-template-areas: "backbtn . . . . ."
+                         ". create stats stats stats ."
+                         ". create stats stats stats . "
+                         ". create stats stats stats . "
+                         ". delete stats stats stats . "
+                         ". . . . . .";
+    grid-gap:1vmax;
+    font-size: 1vmax;
+}
+#createuserdiv{
+    grid-area: create;
+  display: flex;
+  font-size: inherit;
+  justify-content: center;
+  align-items: center;
+}
+#deleteuserdiv{
+    grid-area: delete;
+    display: flex;
+    font-size: inherit;
+    justify-content: center;
+  align-items: center;
+}
+#deleteusercontainer{
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: 1fr 1fr;
+    grid-column-gap: 1vmax;
+}
+#statsdiv{
+    grid-area:stats;
+}
+#statscontainer{
+    display:grid;
+    grid-template-columns: 1fr 1fr; 
+}
+#statscontainer > h3{
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+#statscontainer > hr{
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+#DeleteUserResult{
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
+.container{
+    margin:1vmax;
+    display:grid;
+    align-items:center;
+    text-align: center;
+  }
+#backbutton{
+    grid-area:backbtn;
+    margin:auto;
+    padding:1vmax;
+}
+.somebutton{
+    display:flex;
+    margin:auto;
+    border:1px solid;
+    border-color:black;
+    border-radius:3vmin;
+    padding:.5vmin 1vmin;
+    font-size:inherit;
+    transition-duration:0.1s;
+}
+.blackhover:hover{
+    background-color:black;
+    color:white;
+    border-color:black;
+    cursor:pointer;
+}
+.boxshadow{
+  border-radius:1vmax;
+  box-shadow: 0px 0px 2vmin 0px rgba(0,0,0,0.75);
+}
+
+/* MOBILE VIEW: */
+
+@media only screen and (orientation: portrait) {
+
+    body{
+        grid-template-rows: max-content 1fr max-content max-content;
+        grid-template-columns: 1fr;
+        grid-template-areas: "backbtn"
+                            "stats"
+                            "create"
+                            "delete";
+    }
+
+}
+/* ------------ */
+
+
+
+
+
+
+/* ----- TOOLTIP ----- */
+
+/* Tooltip container */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* ------------------- */

@@ -1,0 +1,642 @@
+html, body{
+  width:100%;
+  height:100%;
+  font-family:oxygen;
+  margin:0;
+}
+#header{display:none;}
+body{
+  display:grid;
+ 
+  grid-template-columns:1fr;
+  grid-template-rows:max-content 1fr max-content;
+  grid-template-areas:"nav"
+                      "schedule"
+                      "footer";
+  
+}
+nav{
+  grid-area:nav;
+  padding:2vmin 3vmin;
+  background-color:rgb(216, 226, 243);
+  color:rgb(71, 130, 179);
+  font-size:2vmax;
+  display:flex;
+  justify-content:space-between;
+}
+#schedule{
+  grid-area:schedule;
+  color: rgb(104, 104, 104);
+  width:100%;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:max-content max-content 1fr;
+  grid-template-areas:"welcome welcome"
+                      "calendar dayschedule"
+                      "confirmbox dayschedule";
+  /*
+  grid-column-gap:3vmax;
+  grid-row-gap:2vmax;
+  */
+  font-size:1.8vmax;
+}
+/*-------------------------------------------------*/
+#welcomewindow{
+  grid-area: welcome;
+  text-align: center;
+}
+#welcomecontainer{
+  margin:1vmax;
+}
+/*-------------------------------------------------*/
+#calendar{
+  grid-area:calendar;
+}
+#calendarcontainer{
+  margin:2vmax;
+}
+#monthnavbar{
+  display:flex;
+  justify-content:space-around;
+  margin:1vmax;
+}
+#monthcaption{
+  width:5vmax;
+  margin-right:5vmax;
+}
+.monthbutton{
+  border:0 solid;
+  border-radius:50%;
+  padding:0.1em 0.5em;
+  transition-duration:0.2s;
+}
+#weekdaycaptions{
+  text-align:center;
+  width:100%;
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+.monthsquare{
+  grid-area:monthsquare;
+  width:100%;
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-gap:0;
+  margin:1vmax auto;
+}
+.daysquare{
+  width:3vmax;
+  height:3vmax;
+  transition-duration:0.1s;
+  /*border:1px solid;*/
+  text-align:center;
+  line-height:3vmax;
+  margin:0;
+  border-radius:50%;
+}
+.todaysquare{
+  background-color: rgb(242, 85, 44) !important;
+  border-color: rgb(242, 85, 44) !important;
+  color: white !important;
+}
+/*-------------------------------------------------*/
+#confirmbox{
+  grid-area:confirmbox;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-around;
+}
+#confirmtitle{
+  margin:2vmax;
+  text-align:center;
+  font-size:2.3vmax;
+}
+#confirmcontainer{
+  display:flex;
+  justify-content:space-around;
+}
+#confirmbuttonbox{
+  margin:2vmax;
+  display:flex;
+  justify-content:center;
+}
+.somebutton{
+  border:1px solid;
+  border-color:black;
+  border-radius:3vmin;
+  padding:.5vmin 1vmin;
+  font-size:inherit;
+  transition-duration:0.1s;
+  text-decoration: none;
+}
+#confirmbutton{
+  margin:1vmin;
+  border:1px solid;
+  border-radius:3vmin;
+  padding:1vmin;
+  font-size:inherit;
+  transition-duration:0.1s;
+}
+.confirmbutton{
+  background-color:white;
+}
+#durationpost, #AdminUserSelectBox, #AdminLessonTypeSelectBox{
+  border-radius: 1vmin;
+  color: rgb(34, 34, 34);
+}
+/*-------------------------------------------------*/
+#dayschedule{
+  grid-area:dayschedule;
+  display:grid;
+  grid-template-rows:max-content max-content 1fr;
+}
+#datecaption{
+  width:100%;
+  text-align:center;
+  padding:3vmin 0;
+}
+#selectorsbar{
+  display:flex;
+}
+.selectors{
+  width:100%;
+  display:inline-block;
+  text-align:center;
+  font-size:inherit;
+  padding:1vmin 0;
+}
+#viewselect {display: none;}
+#daysbar {display: none;}
+#timetable{
+  width:100%;
+  margin:0;
+  display:grid;
+}
+.timetable-day{
+  grid-template-columns:max-content 1fr;
+}
+.timetable-week{
+  grid-template-columns:max-content 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: max-content 1fr;
+}
+.timebar{
+  display:grid;
+  grid-template-rows: repeat(17, 1fr);
+  text-align: center;
+}
+.timebar > p{
+  margin:auto;
+  padding:1.1vmax 1vmax;
+}
+.appointments{
+  display:grid;
+  grid-template-rows: repeat(34, 1fr);
+  text-align:center;
+}
+.appointment-line{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  margin-left:1vmax;
+  margin:0;
+  padding:1.1vmax 1vmax;
+  transition-duration:0.1s;
+}
+.blackselected{
+  background-color:black;
+  color:white;
+  border-color:black;
+}
+.redselected{
+  background-color:rgb(242, 85, 44);
+  color:white !important;
+  border-color:rgb(242, 85, 44);
+}
+.grayselected{
+  background-color: #9098a948;
+  border-color: #9098a948;
+}
+.blackhover:hover{
+  background-color:black;
+  color:white;
+  border-color:black;
+  cursor:pointer;
+}
+/*
+.greenhover
+{
+  margin:auto;
+  width:50%;
+  font-size:1vmin;
+  transition-delay: 0.1s;
+  transition-duration: 0.1s;
+}
+.greenhover:hover{
+  color: rgb(139, 177, 78);
+  cursor:pointer;
+  
+  transform: scale(2);
+  font-weight: 500;
+}
+*/
+    /* ----- CUSTOM TOOLTIP (GREEN HOVER) ----- */
+
+/* Tooltip container */
+.Available {
+  position: relative;
+}
+.Available .greenhover {
+  visibility: hidden;
+  font-weight: 550;
+  color: rgb(139, 177, 78);
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 1;
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+.Available:hover
+{
+  cursor: pointer;
+}
+/* Show the tooltip text when you mouse over the tooltip container */
+.Available:hover .greenhover {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+ /*-------------------------------------------*/
+
+.redhover:hover{
+  background-color: rgb(242, 85, 44);
+  color:white !important;
+  border-color: rgb(242, 85, 44);
+  cursor:pointer;
+}
+.grayhover:hover{
+  background-color: #9098a948;
+  border-color: #9098a948;
+  cursor: pointer;
+}
+.redfont {
+  color: rgb(242, 85, 44);
+  border-color: rgb(242, 85, 44);
+}
+.last-apt{
+  border-radius:0 0 1vmax 0;
+}
+/*
+.Available{
+    color:white;
+    cursor:pointer;
+}
+*/
+.Unavailable{
+    cursor:default;
+    background-color:rgb(216, 226, 243);
+    color:rgb(71, 130, 179);
+}
+.Past{
+  background-color:rgb(243, 243, 243);
+  color:rgb(199, 199, 199);
+  cursor:default;
+}
+.whitebutton{
+  color:white;
+  text-decoration: none;
+  border:1px solid;
+  border-color:white;
+  border-radius:3vmin;
+  padding:0 1vmin;
+  font-size:inherit;
+  transition-duration:0.1s;
+}
+.whitebutton:hover{
+  background-color:white;
+  color:black;
+  cursor:pointer;
+}
+footer{
+  display:none;
+  /*
+  grid-area:footer;
+  padding:8vmin;
+  background-color:black
+  */
+}
+.boxshadow{
+  border-radius:1vmax;
+  box-shadow: 0px 0px 2vmin 0px rgba(0,0,0,0.75);
+}
+.headline{
+  font-size:2vmax;
+}
+.left-border{
+  border-left:1px solid lightgray;
+}
+.bottom-gray-border{
+  border-bottom:1px solid lightgray;
+}
+.bottom-light-border{
+  border-bottom:1px solid rgb(243, 243, 243);
+}
+.lightborder{
+  border: 1px solid lightgray;
+}
+/*-------------------------------------------------*/
+.alertbox{
+  z-index:2;
+  background-color:white;
+  width:70vmin;
+  height:70vmax;
+  position:absolute;
+  left: 0; 
+  right: 0;
+  top:0;
+  bottom:0;
+  margin:auto;
+  display:flex;
+  font-size: 2vmax;
+  display: none;
+}
+#alertboxdimmer{
+  z-index:1;
+  background-color:rgba(100,100,100,0.6);
+  width:100%;
+  height:100%;
+  position:absolute;
+  display: none;
+}
+.alertcontainer{
+  height:90%;
+  width:90%;
+  margin:auto;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:space-around;
+}
+.alertbutton{
+  width:10%;
+  text-align:center;
+  color: rgb(242, 85, 44);
+  border-color: rgb(242, 85, 44);
+}
+#AdminGroupCheckboxes{
+  display: grid;
+  grid-gap: 1vmin;
+}
+#abd-button-ok {display: none;}
+
+#yesnobox
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#yesnobox > span
+{
+  width:3vmax;
+  margin: 0 1vmax;
+}
+/* WHEN ON COMPUTER: */
+
+@media only screen and (orientation: landscape) {
+  
+  #schedule {
+    font-size:1vmax;
+    margin:0;
+    grid-template-columns:max-content 1fr;
+    grid-template-rows:max-content max-content 1fr;
+    grid-template-areas:"welcome dayschedule"
+                        "calendar dayschedule"
+                        "confirmbox dayschedule";
+    /*
+    grid-column-gap:2vmax;
+    grid-row-gap:1vmax;
+    */
+    align-content: space-between;
+  }
+
+  #confirmbutton {padding:3vmin;}
+  #confirmtitle {font-size:1.5vmax;}
+  footer {display:none;}
+  nav {
+    padding: 0.5vmin;
+    font-size:1vmax;
+  }
+  .headline{font-size:1.2vmax;}
+  body{
+    grid-template-rows:max-content 1fr;
+    grid-template-areas:"nav"
+                        "schedule"
+                        "footer";
+  }
+  /*-------------------------------------------------*/
+  #welcomewindow{margin:0;}
+  #welcomecontainer{margin:1vmax;}
+  /*-------------------------------------------------*/
+  #dayschedule{
+    grid-template-rows:max-content max-content 1fr;
+  }
+  #datecaption {padding:1vmin 0;}
+  .teacherlinebreak {display:none;}
+  .selectors {width:50%;}
+  #viewselect {display: initial;}
+  #daysbar {
+    grid-column-start: 2;
+    grid-column-end:9;
+    display: grid;
+    grid-template-columns:repeat(14,1fr);
+    text-align:center;
+    justify-content: space-evenly;
+  }
+  #daysbar > span{
+    margin:0;
+    padding:1vmin;
+  }
+  .timebar > p {padding:0 1vmin;}
+  .appointment-line {padding:0;}
+    /*-------------------------------------------------*/
+  #calendarcontainer{
+    margin:2vmin;
+  }
+  #monthnavbar{
+    margin:1vmin;
+  }
+  #monthcaption{
+    width:5vmin;
+    margin-right:5vmin;
+  }
+  .daysquare{
+    width:2.5vmin;
+    height:2.5vmin;
+    line-height:2.5vmin;
+  }
+    /*-------------------------------------------------*/
+  .alertbox{
+    width: 30vmax;
+    height: 30vmin;
+    font-size: 1vmax;
+  }
+}
+    /* --------------- */
+
+
+    /* ----- TOOLTIP ----- */
+
+/* Tooltip container */
+.tooltip {
+  position: relative;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 80px;
+  background-color: rgb(170, 170, 170);
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 1;
+  bottom: 80%;
+  left: 50%;
+  margin-left: -40px;
+
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: rgb(170, 170, 170) transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.tooltiptext:hover
+{
+  color:rgb(242, 85, 44);
+}
+
+/* --- LOADING ANIMATION --- */
+
+.lds-default {
+  display: none;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+
+  left: 0; 
+  right: 0;
+  top:0;
+  bottom:0;
+  margin:auto;
+  z-index: 3;
+}
+
+.lds-default > div
+{
+  box-shadow: 1px 1px 10px 1px rgb(236, 236, 236);
+}
+
+.lds-default div {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: #cef;
+  border-radius: 50%;
+  animation: lds-default 1.2s linear infinite;
+}
+.lds-default div:nth-child(1) {
+  animation-delay: 0s;
+  top: 29px;
+  left: 53px;
+}
+.lds-default div:nth-child(2) {
+  animation-delay: -0.1s;
+  top: 18px;
+  left: 50px;
+}
+.lds-default div:nth-child(3) {
+  animation-delay: -0.2s;
+  top: 9px;
+  left: 41px;
+}
+.lds-default div:nth-child(4) {
+  animation-delay: -0.3s;
+  top: 6px;
+  left: 29px;
+}
+.lds-default div:nth-child(5) {
+  animation-delay: -0.4s;
+  top: 9px;
+  left: 18px;
+}
+.lds-default div:nth-child(6) {
+  animation-delay: -0.5s;
+  top: 18px;
+  left: 9px;
+}
+.lds-default div:nth-child(7) {
+  animation-delay: -0.6s;
+  top: 29px;
+  left: 6px;
+}
+.lds-default div:nth-child(8) {
+  animation-delay: -0.7s;
+  top: 41px;
+  left: 9px;
+}
+.lds-default div:nth-child(9) {
+  animation-delay: -0.8s;
+  top: 50px;
+  left: 18px;
+}
+.lds-default div:nth-child(10) {
+  animation-delay: -0.9s;
+  top: 53px;
+  left: 29px;
+}
+.lds-default div:nth-child(11) {
+  animation-delay: -1s;
+  top: 50px;
+  left: 41px;
+}
+.lds-default div:nth-child(12) {
+  animation-delay: -1.1s;
+  top: 41px;
+  left: 50px;
+}
+@keyframes lds-default {
+  0%, 20%, 80%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+}
+
+/* ------------------- */
