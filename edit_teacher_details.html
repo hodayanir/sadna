@@ -7,8 +7,6 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
-    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-
 
     <!-- CSS here -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -18,13 +16,12 @@
     <link rel="stylesheet" href="assets/css/magnific-popup.css">
     <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
     <link rel="stylesheet" href="assets/css/themify-icons.css">
-    <link rel="stylesheet" href="assets/css/themify-icons.css">
     <link rel="stylesheet" href="assets/css/slick.css">
     <link rel="stylesheet" href="assets/css/nice-select.css">
     <link rel="stylesheet" href="assets/css/style.css">
 
-
 </head>
+<body>
 <!--? Preloader Start -->
 <div id="preloader-active">
     <div class="preloader d-flex align-items-center justify-content-center">
@@ -36,9 +33,7 @@
         </div>
     </div>
 </div>
-<!-- Preloader Start -->
 <header id="header-wrapper"></header>
-
 <main>
     <!--? Hero Start -->
     <div class="slider-area ">
@@ -47,50 +42,78 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="hero-cap hero-cap2 text-center">
-                            <h2>Login</h2>
+                            <h2>Edit My Details</h2>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Hero End -->
-    <!-- ================ Login section start ================= -->
-    <section class="contact-section">
-        <div class="container">
-            <h3>Welcome back! please login</h3>
-            <form class="form-contact contact_form" action="login.php" method="post" id="loginForm">
-                <div class="col-6">
-                    <div class="row mt-4">
-                        <div class="col-12">
-                            <input class="single-input" name="email" id="email" type="email"
-                                   placeholder="Enter your email address" required></div>
+
+    <!-- End Button -->
+    <!-- Start Align Area -->
+    <div class="whole-wrap">
+        <div class="container box_1170">
+            <div class="section-top-border">
+                <h3 class="mb-30">Edit Information</h3>
+                <form action="edit_teacher_details.php" method="post">
+                    <!-- id="editForm" -->
+                    <div class="mt-10">
+                        <input type="text" name="first_name" placeholder="First Name"
+                               onfocus="this.placeholder = ''" onblur="this.placeholder = 'First Name'" required
+                               class="single-input">
                     </div>
-                    <div class="row mt-4">
-                        <div class="col-12">
-                            <input class="single-input" name="password" id="password" type="password"
-                                   placeholder="Enter your password" required>
+                    <div class="mt-10">
+                        <input type="text" name="last_name" placeholder="Last Name"
+                               onfocus="this.placeholder = ''" onblur="this.placeholder = 'Last Name'" required
+                               class="single-input">
+                    </div>
+                    <div class="input-group-icon mt-10">
+                        <div class="icon"><i class="fa fa-globe" aria-hidden="true"></i></div>
+                        <div class="form-select" id="default-select">
+                            <select>
+                                <option value=" 1">Country</option>
+                                <option value="1">Bangladesh</option>
+                                <option value="1">India</option>
+                                <option value="1">England</option>
+                                <option value="1">Srilanka</option>
+                            </select>
                         </div>
                     </div>
-                    <div class="row mt-1">
-                        <div class="col-8">
-                            <span id="formError" class="color-red text-hide">Username or Password are incorrect</span>
-                        </div>
+                    <div class="input-group-icon mt-10">
+                        <div class="icon"><i class="fa fa-thumb-tack" aria-hidden="true"></i></div>
+                        <input type="text" name="address" placeholder="Address" onfocus="this.placeholder = 'Address'"
+                               onblur="this.placeholder = 'Address'" required class="single-input">
+                    </div>
+                    <div class="mt-10">
+									<textarea class="single-input"
+                                              name="description"
+                                              placeholder="Description (Education, experience, lifestyle, etc.)"
+                                              onfocus="this.placeholder = ''" onblur="this.placeholder = 'Description'"
+                                              required
+                                    >
+
+									</textarea>
                     </div>
                     <div class="row mt-4">
                         <div class="col-6">
-                            <button type="submit" class="button button-contactForm boxed-btn">Login</button>
+                            <button type="submit" class="button button-contactForm boxed-btn" onclick="appSubmited()">
+                                Save
+                            </button>
                         </div>
                     </div>
-                </div>
-            </form>
-
+                </form>
+            </div>
         </div>
-    </section>
-    <!-- ================ contact section end ================= -->
+    </div>
+    <!-- End Align Area -->
 </main>
+<header id="footer-wrapper"></header>
+<!-- Scroll Up -->
+<div id="back-top">
+    <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+</div>
 
-<footer id="footer-wrapper"></footer>
 <!-- JS here -->
 
 <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
@@ -107,25 +130,23 @@
 <!-- One Page, Animated-HeadLin -->
 <script src="./assets/js/wow.min.js"></script>
 <script src="./assets/js/animated.headline.js"></script>
+<script src="./assets/js/jquery.magnific-popup.js"></script>
 
 <!-- Nice-select, sticky -->
 <script src="./assets/js/jquery.nice-select.min.js"></script>
 <script src="./assets/js/jquery.sticky.js"></script>
-<script src="./assets/js/jquery.magnific-popup.js"></script>
 
 <!-- contact js -->
-<!--
 <script src="./assets/js/contact.js"></script>
-<script src="./assets/js/jquery.form.js"></script>
+<!-- <script src="./assets/js/jquery.form.js"></script> -->
 <script src="./assets/js/jquery.validate.min.js"></script>
 <script src="./assets/js/mail-script.js"></script>
 <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
--->
 
 <!-- Jquery Plugins, main Jquery -->
 <script src="./assets/js/plugins.js"></script>
 <script src="./assets/js/main.js"></script>
-<script src="./assets/js/login.js"></script>
+<!-- <script src="./assets/js/edit_teacher_details.js"></script> -->
 
 </body>
 </html>

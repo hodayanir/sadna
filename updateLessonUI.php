@@ -1,3 +1,22 @@
+<?php
+include "mysqlConfig.php";
+
+$lessonCode = $_GET["lesson_id"];
+$u_email = $_COOKIE['email'];
+
+$sql_query = "SELECT l.lessonName, l.lessonLink, l.lessonLength, l.courseCode FROM lessons l WHERE l.lessonCode='$lessonCode'";
+
+$res = mysqli_query($link, $sql_query);
+$lessons = array();
+while ($row = mysqli_fetch_assoc($res)) {
+    $lessonName = $row['lessonName'];
+    $lessonLink = $row['lessonLink'];
+    $lessonTime = $row['lessonLength'];
+    $courseCode = $row['courseCode'];
+    $lessons[] = $row;
+}
+?>
+
 <!doctype html>
 <html class="no-js" lang="zxx">
 <head>
@@ -47,7 +66,7 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="hero-cap hero-cap2 text-center">
-                            <h2>Login</h2>
+                            <h2><?php echo $lessonName ?></h2>
                         </div>
                     </div>
                 </div>
@@ -58,28 +77,31 @@
     <!-- ================ Login section start ================= -->
     <section class="contact-section">
         <div class="container">
-            <h3>Welcome back! please login</h3>
-            <form class="form-contact contact_form" action="login.php" method="post" id="loginForm">
+            <form class="form-contact contact_form" action="updateLesson.php" method="post" id="addLesson">
+                <input type="hidden" name="courseCode" id="courseCode" value= <?php echo $courseCode ?> >
+                <input type="hidden" name="lessonCode" id="lessonCode" value= <?php echo $lessonCode ?> >
                 <div class="col-6">
                     <div class="row mt-4">
                         <div class="col-12">
-                            <input class="single-input" name="email" id="email" type="email"
-                                   placeholder="Enter your email address" required></div>
+                            <h5>Lesson title:</h5>
+                            <input class="single-input" name="LessonTitle" id="LessonTitle" value=<?php echo $lessonName ?>>
+                        </div>
                     </div>
                     <div class="row mt-4">
                         <div class="col-12">
-                            <input class="single-input" name="password" id="password" type="password"
-                                   placeholder="Enter your password" required>
+                            <h5>Lesson link:</h5>
+                            <input class="single-input" name="LessonLink" id="LessonLink" value="<?php echo $lessonLink ?>">
                         </div>
                     </div>
-                    <div class="row mt-1">
-                        <div class="col-8">
-                            <span id="formError" class="color-red text-hide">Username or Password are incorrect</span>
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <h5>Lesson length:[hh:mm:ss]</h5>
+                            <input class="single-input" name="LessonLength" id="LessonLength" value="<?php echo $lessonTime ?>">
                         </div>
                     </div>
                     <div class="row mt-4">
                         <div class="col-6">
-                            <button type="submit" class="button button-contactForm boxed-btn">Login</button>
+                            <button type="submit" class="button button-contactForm boxed-btn">Update</button>
                         </div>
                     </div>
                 </div>
@@ -125,7 +147,7 @@
 <!-- Jquery Plugins, main Jquery -->
 <script src="./assets/js/plugins.js"></script>
 <script src="./assets/js/main.js"></script>
-<script src="./assets/js/login.js"></script>
+<!--<script src="./assets/js/login.js"></script>-->
 
 </body>
 </html>

@@ -1,14 +1,43 @@
+function set_header_content(){
+  if(document.cookie !== ""){
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let cookie = {}
+    for(let cook of decodedCookie.split('; ')) {
+      let param = cook.split('=')
+      cookie[param[0]] = param[1]
+    }
+
+    $(".header-info-right").html(`
+          <ul>
+              <li>
+                    <a href="my_area.php">Hi, ${cookie['first_name']}</a>
+              </li>
+              <li>
+                    <a href="logout.php">Logout</a>
+              </li>
+          </ul>`
+    )
+    let link = 'watchCourseUI.php'
+    if (cookie['user_type'] === 'teachers'){
+      link = 'teacher_dashboard.php'
+    }
+
+    $("#dashboard_button").attr('href', link)
+  }
+}
+
 (function ($)
   { "use strict"
   
 /* 1. Proloder */
     $(window).on('load', function () {
-      $("#header-wrapper").load("header_footer.html #header");
+      $("#header-wrapper").load("header_footer.html #header", set_header_content);
       $("#footer-wrapper").load("header_footer.html #footer");
       $('#preloader-active').delay(450).fadeOut('slow');
       $('body').delay(450).css({
         'overflow': 'visible'
       });
+
     });
 
 /* 2. sticky And Scroll UP */

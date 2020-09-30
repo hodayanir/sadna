@@ -1,11 +1,11 @@
 <?php
 
 // Connect to the database:
-session_start();
-$conn_server = $_SESSION['CONNECTION_SERVER'];
-$conn_user = $_SESSION['CONNECTION_USER'];
-$conn_password = $_SESSION['CONNECTION_PASSWORD'];
-$database = $_SESSION['CONNECTION_DATABASE'];
+    session_start();
+    $conn_server = $_SESSION['CONNECTION_SERVER'];
+    $conn_user = $_SESSION['CONNECTION_USER'];
+    $conn_password = $_SESSION['CONNECTION_PASSWORD'];
+    $database = $_SESSION['CONNECTION_DATABASE'];
 
 $conn = mysqli_connect($conn_server,$conn_user,$conn_password,$database);
 if (!$conn) {
@@ -32,13 +32,8 @@ if ($user && $date && $time && $teacher)
     {
         if ($row['time'] < $earliest) $earliest = $row['time'];
     }
-    if ($earliest != 100) 
-    {
-        echo "Lesson not available!<br>There is another lesson at ";
-        if (fmod($earliest,1)) echo ($earliest - 0.5) . ":30</b>.";
-        else echo $earliest . ":00</b> o'clock.";
-    }
-    else if ($until > 23) echo "Lesson not available!<br>Cannot set lessons for after 23:00";
+    if ($earliest != 100) echo "Lesson not available! There is another lesson at " . $earliest . ".";
+    else if ($until > 23) echo "Lesson not available! Cannot set lessons for after 23:00";
     // Create lesson if it doesn't conflict:
     else
     {
@@ -47,9 +42,7 @@ if ($user && $date && $time && $teacher)
         if (mysqli_query($conn, $sql)) {
             echo "A <b>{$lessontype}</b> lesson of <b>{$duration} hour";
             if ($duration > 1) echo "s";
-            echo "</b><br> is now scheduled for <b>{$user} </b>with <b>{$teacher}</b><br>on <b>{$date}</b> at <b>"; 
-            if (fmod($time,1)) echo ($time - 0.5) . ":30</b>.";
-            else echo $time . ":00</b> o'clock.";
+            echo "</b><br> is now scheduled for <b>{$user} </b>with <b>{$teacher}</b><br>on <b>{$date}</b> at <b>{$time}:00</b> o'clock.";
         } else {
             echo "Error:<br>" . $sql . "<br>" . mysqli_error($conn);
         }  

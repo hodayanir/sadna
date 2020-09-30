@@ -1,3 +1,12 @@
+<?php
+    include "mysqlConfig.php";
+
+    $sql_query="SELECT first_name,last_name FROM teachers";
+    
+    $res=mysqli_query($link, $sql_query);
+?>
+
+
 <!doctype html>
 <html class="no-js" lang="zxx">
 <head>
@@ -6,18 +15,18 @@
     <title> Education | Template </title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="site.webmanifest">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-
-
     <!-- CSS here -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
     <link rel="stylesheet" href="assets/css/slicknav.css">
+    <link rel="stylesheet" href="assets/css/flaticon.css">
+    <link rel="stylesheet" href="assets/css/gijgo.css">
     <link rel="stylesheet" href="assets/css/animate.min.css">
     <link rel="stylesheet" href="assets/css/magnific-popup.css">
     <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
-    <link rel="stylesheet" href="assets/css/themify-icons.css">
     <link rel="stylesheet" href="assets/css/themify-icons.css">
     <link rel="stylesheet" href="assets/css/slick.css">
     <link rel="stylesheet" href="assets/css/nice-select.css">
@@ -25,6 +34,7 @@
 
 
 </head>
+<body>
 <!--? Preloader Start -->
 <div id="preloader-active">
     <div class="preloader d-flex align-items-center justify-content-center">
@@ -37,8 +47,8 @@
     </div>
 </div>
 <!-- Preloader Start -->
-<header id="header-wrapper"></header>
 
+<header id="header-wrapper"></header>
 <main>
     <!--? Hero Start -->
     <div class="slider-area ">
@@ -47,7 +57,7 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="hero-cap hero-cap2 text-center">
-                            <h2>Login</h2>
+                            <h2>Instructors</h2>
                         </div>
                     </div>
                 </div>
@@ -55,41 +65,38 @@
         </div>
     </div>
     <!-- Hero End -->
-    <!-- ================ Login section start ================= -->
-    <section class="contact-section">
+    <!--? Team Ara Start -->
+    <div class="team-area pt-100 pb-100">
         <div class="container">
-            <h3>Welcome back! please login</h3>
-            <form class="form-contact contact_form" action="login.php" method="post" id="loginForm">
-                <div class="col-6">
-                    <div class="row mt-4">
-                        <div class="col-12">
-                            <input class="single-input" name="email" id="email" type="email"
-                                   placeholder="Enter your email address" required></div>
-                    </div>
-                    <div class="row mt-4">
-                        <div class="col-12">
-                            <input class="single-input" name="password" id="password" type="password"
-                                   placeholder="Enter your password" required>
+            <div class="row">
+                
+                <?php
+                while($row = mysqli_fetch_assoc($res)){ 
+                $teacher_email = $row['email'] ;?>
+                
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="single-team mb-30">
+                        <div class="team-img">
+                            <img src="assets/img/gallery/team1.png" alt="">
+                            <!-- Blog Social -->
+                            <ul class="team-social">
+                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fas fa-globe"></i></a></li>
+                            </ul>
                         </div>
-                    </div>
-                    <div class="row mt-1">
-                        <div class="col-8">
-                            <span id="formError" class="color-red text-hide">Username or Password are incorrect</span>
-                        </div>
-                    </div>
-                    <div class="row mt-4">
-                        <div class="col-6">
-                            <button type="submit" class="button button-contactForm boxed-btn">Login</button>
+                        <div class="team-caption">
+                            <h3><a href="instructor.php"><?php echo $row['first_name'] , " ", $row['last_name']?></a></h3>
+                            <p>Faculty</p>
                         </div>
                     </div>
                 </div>
-            </form>
-
-        </div>
-    </section>
-    <!-- ================ contact section end ================= -->
+                <?php    } ?>
+           </div> 
+     </div>
+</div>
+    <!-- Team Ara End -->
 </main>
-
 <footer id="footer-wrapper"></footer>
 <!-- JS here -->
 
@@ -107,25 +114,28 @@
 <!-- One Page, Animated-HeadLin -->
 <script src="./assets/js/wow.min.js"></script>
 <script src="./assets/js/animated.headline.js"></script>
+<script src="./assets/js/jquery.magnific-popup.js"></script>
 
+<!-- Date Picker -->
+<script src="./assets/js/gijgo.min.js"></script>
 <!-- Nice-select, sticky -->
 <script src="./assets/js/jquery.nice-select.min.js"></script>
 <script src="./assets/js/jquery.sticky.js"></script>
-<script src="./assets/js/jquery.magnific-popup.js"></script>
+
+<!-- counter , waypoint -->
+<script src="./assets/js/jquery.counterup.min.js"></script>
+<script src="./assets/js/waypoints.min.js"></script>
 
 <!-- contact js -->
-<!--
 <script src="./assets/js/contact.js"></script>
 <script src="./assets/js/jquery.form.js"></script>
 <script src="./assets/js/jquery.validate.min.js"></script>
 <script src="./assets/js/mail-script.js"></script>
 <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
--->
 
 <!-- Jquery Plugins, main Jquery -->
 <script src="./assets/js/plugins.js"></script>
 <script src="./assets/js/main.js"></script>
-<script src="./assets/js/login.js"></script>
 
 </body>
 </html>

@@ -37,7 +37,7 @@ if (isset($_SESSION['username']))
   }
   ?>
   </form>
-    <form id="logincontainer" name="logincontainer" action="schedule.php" method="post">
+    <form id="logincontainer" name="logincontainer" action="\schedule.php" method="post">
       <label for="username" class="inp">
       <input id="username" name="username" type="text" placeholder="&nbsp;" autofocus>
       <span class="label">Username</span>

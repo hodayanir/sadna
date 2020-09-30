@@ -88,27 +88,6 @@ body{
   box-shadow: 0px 0px 2vmin 0px rgba(0,0,0,0.75);
 }
 
-/* MOBILE VIEW: */
-
-@media only screen and (orientation: portrait) {
-
-    body{
-        grid-template-rows: max-content 1fr max-content max-content;
-        grid-template-columns: 1fr;
-        grid-template-areas: "backbtn"
-                            "stats"
-                            "create"
-                            "delete";
-    }
-
-}
-/* ------------ */
-
-
-
-
-
-
 /* ----- TOOLTIP ----- */
 
 /* Tooltip container */

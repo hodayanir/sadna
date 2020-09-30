@@ -1,3 +1,23 @@
+<?php
+include "mysqlConfig.php";
+
+$t_email = $_COOKIE['email'];
+$first_name = $_COOKIE['first_name'];
+$last_name = $_COOKIE['last_name'];
+
+$sql_query = $sql_query="SELECT country, address, phone, description, photo FROM teachers WHERE (email='$t_email') 
+UNION SELECT country, address, phone, description, photo FROM students WHERE (email='$t_email');";
+$res = mysqli_query($link, $sql_query);
+$res=mysqli_query($link, $sql_query);
+if (mysqli_num_rows($res) > 0) {
+    $row = mysqli_fetch_row($res);
+    $country = $row[0];
+    $address = $row[1];
+    $phone = $row[2];
+    $description = $row[3];
+}
+?>
+
 <!doctype html>
 <html class="no-js" lang="zxx">
 <head>
@@ -47,7 +67,7 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="hero-cap hero-cap2 text-center">
-                            <h2>Login</h2>
+                            <h2>Edit Details</h2>
                         </div>
                     </div>
                 </div>
@@ -58,28 +78,41 @@
     <!-- ================ Login section start ================= -->
     <section class="contact-section">
         <div class="container">
-            <h3>Welcome back! please login</h3>
-            <form class="form-contact contact_form" action="login.php" method="post" id="loginForm">
+            <form class="form-contact contact_form" action="updateTeacher.php" method="post" id="addLesson">
                 <div class="col-6">
                     <div class="row mt-4">
                         <div class="col-12">
-                            <input class="single-input" name="email" id="email" type="email"
-                                   placeholder="Enter your email address" required></div>
+                            <h5>First Name</h5>
+                            <input class="single-input" name="first_name" id="first_name" value=<?php echo $first_name ?>>
+                        </div>
                     </div>
                     <div class="row mt-4">
                         <div class="col-12">
-                            <input class="single-input" name="password" id="password" type="password"
-                                   placeholder="Enter your password" required>
-                        </div>
-                    </div>
-                    <div class="row mt-1">
-                        <div class="col-8">
-                            <span id="formError" class="color-red text-hide">Username or Password are incorrect</span>
+                            <h5>Last Name</h5>
+                            <input class="single-input" name="last_name" id="last_name" value="<?php echo $last_name ?>">
                         </div>
                     </div>
                     <div class="row mt-4">
+                        <div class="col-12">
+                            <h5>country</h5>
+                            <input class="single-input" name="country" id="country" value="<?php echo $country ?>">
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <h5>address</h5>
+                            <input class="single-input" name="address" id="address" value="<?php echo $address ?>">
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <h5>description</h5>
+                            <textarea class="single-input" name="description"><?php echo $description ?></textarea>
+                        </div>
+                    </div>
+                    <div class="row mt-5">
                         <div class="col-6">
-                            <button type="submit" class="button button-contactForm boxed-btn">Login</button>
+                            <button type="submit" class="button button-contactForm boxed-btn">Update</button>
                         </div>
                     </div>
                 </div>
@@ -125,7 +158,7 @@
 <!-- Jquery Plugins, main Jquery -->
 <script src="./assets/js/plugins.js"></script>
 <script src="./assets/js/main.js"></script>
-<script src="./assets/js/login.js"></script>
+<!--<script src="./assets/js/login.js"></script>-->
 
 </body>
 </html>

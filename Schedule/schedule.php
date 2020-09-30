@@ -1,10 +1,39 @@
 <?php
 
-include "mysqlConfig.php";
+/*
+$conn_server = "localhost";
+$conn_user = "root";
+$conn_password = "root";
+$database="business";
+
+$conn = mysqli_connect($conn_server, $conn_user, $conn_password, $database);
+
+if (!$conn) {die("Connection failed: " . mysqli_connect_error() . "<br>");}
+*/
+/*
+class DBi {
+  public static $conn;
+}
+DBi::$conn = mysqli_connect('localhost', "root", "root", "business");
+
+if (!(DBi::$conn)) {die("Connection failed: " . mysqli_connect_error() . "<br>");}
+
+$conn = DBi::$conn;
+*/
+
 session_start();
 
+$_SESSION['CONNECTION_SERVER'] = 'fdb29.awardspace.net';
+$_SESSION['CONNECTION_USER'] = '3560186_mirit';
+$_SESSION['CONNECTION_PASSWORD'] = 'lavkanit2020';
+$_SESSION['CONNECTION_DATABASE'] = '3560186_mirit';
 
-$conn = mysqli_select_db;
+$conn_server = $_SESSION['CONNECTION_SERVER'];
+$conn_user = $_SESSION['CONNECTION_USER'];
+$conn_password = $_SESSION['CONNECTION_PASSWORD'];
+$database = $_SESSION['CONNECTION_DATABASE'];
+
+$conn = mysqli_connect($conn_server, $conn_user, $conn_password, $database);
 if (!$conn) die("Connection failed: " . mysqli_connect_error() . "<br>");
 
 
@@ -47,7 +76,7 @@ else{  // User has already logged in
     header("Location: index.php");
   }
 }
-if($username == "Mirit" || $username == "Omer"|| $username == "Hodaya"){
+if($username == "eyal" || $username == "michal"){
   $_SESSION['admin'] = 1;
   $admin = 1;
 }

@@ -7,8 +7,6 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
-    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-
 
     <!-- CSS here -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -22,7 +20,7 @@
     <link rel="stylesheet" href="assets/css/slick.css">
     <link rel="stylesheet" href="assets/css/nice-select.css">
     <link rel="stylesheet" href="assets/css/style.css">
-
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 
 </head>
 <!--? Preloader Start -->
@@ -38,7 +36,6 @@
 </div>
 <!-- Preloader Start -->
 <header id="header-wrapper"></header>
-
 <main>
     <!--? Hero Start -->
     <div class="slider-area ">
@@ -47,7 +44,7 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="hero-cap hero-cap2 text-center">
-                            <h2>Login</h2>
+                            <h2>Success</h2>
                         </div>
                     </div>
                 </div>
@@ -55,42 +52,21 @@
         </div>
     </div>
     <!-- Hero End -->
-    <!-- ================ Login section start ================= -->
+    <!-- ================ contact section start ================= -->
     <section class="contact-section">
         <div class="container">
-            <h3>Welcome back! please login</h3>
-            <form class="form-contact contact_form" action="login.php" method="post" id="loginForm">
-                <div class="col-6">
-                    <div class="row mt-4">
-                        <div class="col-12">
-                            <input class="single-input" name="email" id="email" type="email"
-                                   placeholder="Enter your email address" required></div>
-                    </div>
-                    <div class="row mt-4">
-                        <div class="col-12">
-                            <input class="single-input" name="password" id="password" type="password"
-                                   placeholder="Enter your password" required>
-                        </div>
-                    </div>
-                    <div class="row mt-1">
-                        <div class="col-8">
-                            <span id="formError" class="color-red text-hide">Username or Password are incorrect</span>
-                        </div>
-                    </div>
-                    <div class="row mt-4">
-                        <div class="col-6">
-                            <button type="submit" class="button button-contactForm boxed-btn">Login</button>
-                        </div>
-                    </div>
+            <div class="d-none d-sm-block mb-5 pb-4">
+                <div class="hero-cap hero-cap2 text-center">
+                    <h3>Thank you for registering! You chose the best way to success!</h3>
+                    <br/>
+                    <a href="login.html" class="button button-contactForm boxed-btn">Click here to login</a>
                 </div>
-            </form>
-
+            </div>
         </div>
     </section>
     <!-- ================ contact section end ================= -->
 </main>
-
-<footer id="footer-wrapper"></footer>
+<footer></footer>
 <!-- JS here -->
 
 <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
@@ -113,19 +89,17 @@
 <script src="./assets/js/jquery.sticky.js"></script>
 <script src="./assets/js/jquery.magnific-popup.js"></script>
 
-<!-- contact js -->
-<!--
+<!-- contact js      -->
 <script src="./assets/js/contact.js"></script>
 <script src="./assets/js/jquery.form.js"></script>
 <script src="./assets/js/jquery.validate.min.js"></script>
 <script src="./assets/js/mail-script.js"></script>
 <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
--->
+
 
 <!-- Jquery Plugins, main Jquery -->
 <script src="./assets/js/plugins.js"></script>
 <script src="./assets/js/main.js"></script>
-<script src="./assets/js/login.js"></script>
 
 </body>
 </html>

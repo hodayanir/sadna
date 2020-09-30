@@ -1,3 +1,22 @@
+<?php
+include "mysqlConfig.php";
+$courseCode = $_GET["course_id"];
+$u_email = $_COOKIE['email'];
+
+
+$sql_query = "SELECT courses.courseCode, name, description, l.lessonCode, l.lessonName, l.lessonLink, l.lessonLength FROM courses LEFT JOIN lessons l on courses.courseCode = l.courseCode WHERE courses.courseCode='$courseCode'";
+
+$res = mysqli_query($link, $sql_query);
+$lessons = array();
+while ($row = mysqli_fetch_assoc($res)) {
+    $courseCode = $row['courseCode'];
+    $courseName = $row['name'];
+    $courseDescription = $row['description'];
+    $lessons[] = $row;
+}
+
+
+?>
 <!doctype html>
 <html class="no-js" lang="zxx">
 <head>
@@ -47,7 +66,7 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="hero-cap hero-cap2 text-center">
-                            <h2>Login</h2>
+                            <h2><?php echo $courseName ?></h2>
                         </div>
                     </div>
                 </div>
@@ -58,34 +77,45 @@
     <!-- ================ Login section start ================= -->
     <section class="contact-section">
         <div class="container">
-            <h3>Welcome back! please login</h3>
-            <form class="form-contact contact_form" action="login.php" method="post" id="loginForm">
-                <div class="col-6">
-                    <div class="row mt-4">
-                        <div class="col-12">
-                            <input class="single-input" name="email" id="email" type="email"
-                                   placeholder="Enter your email address" required></div>
+            <div class="row">
+                <div class="col-4">
+                    <div class="row">
+                        <h2>
+                            Lessons
+                        </h2>
                     </div>
-                    <div class="row mt-4">
-                        <div class="col-12">
-                            <input class="single-input" name="password" id="password" type="password"
-                                   placeholder="Enter your password" required>
-                        </div>
-                    </div>
-                    <div class="row mt-1">
-                        <div class="col-8">
-                            <span id="formError" class="color-red text-hide">Username or Password are incorrect</span>
-                        </div>
-                    </div>
-                    <div class="row mt-4">
-                        <div class="col-6">
-                            <button type="submit" class="button button-contactForm boxed-btn">Login</button>
-                        </div>
+                    <div class="row">
+                        <ul>
+                            <?php foreach ($lessons as $row) { ?>
+                                <li>
+                                    <h4>
+                                        <span><i class="ti-time"></i> <?php echo $row['lessonLength'] ?> </span>
+                                        <a class="color-blue"
+                                           href="/updateLessonUI.php?lesson_id=<?php echo $row['lessonCode'] ?>"><?php echo $row['lessonName'] ?></a>
+                                    </h4>
+
+                                </li>
+                            <?php } ?>
+                        </ul>
                     </div>
                 </div>
-            </form>
+                <div class="col-8">
+                    <div class="row">
+                        <h2>
+                            <?php echo $current_lesson_name?> (<span><i class="ti-time"></i> <?php echo $current_lesson_time ?> </span>)
+                        </h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe class="embed-responsive-item" src="<?php echo $current_lesson_link ?>" allowfullscreen></iframe>
+                            </div>
+                        </div>
 
-        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
     </section>
     <!-- ================ contact section end ================= -->
 </main>
@@ -125,7 +155,7 @@
 <!-- Jquery Plugins, main Jquery -->
 <script src="./assets/js/plugins.js"></script>
 <script src="./assets/js/main.js"></script>
-<script src="./assets/js/login.js"></script>
+<!--<script src="./assets/js/login.js"></script>-->
 
 </body>
 </html>

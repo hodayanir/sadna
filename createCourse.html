@@ -47,7 +47,7 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="hero-cap hero-cap2 text-center">
-                            <h2>Login</h2>
+                            <h2>Create New Course</h2>
                         </div>
                     </div>
                 </div>
@@ -58,18 +58,33 @@
     <!-- ================ Login section start ================= -->
     <section class="contact-section">
         <div class="container">
-            <h3>Welcome back! please login</h3>
-            <form class="form-contact contact_form" action="login.php" method="post" id="loginForm">
+            <form class="form-contact contact_form" action="createCourse.php" method="post" id="createCourse">
                 <div class="col-6">
                     <div class="row mt-4">
                         <div class="col-12">
-                            <input class="single-input" name="email" id="email" type="email"
-                                   placeholder="Enter your email address" required></div>
+                            <h5>Enter course name</h5>
+                            <input class="single-input" name="courseName" id="name"
+                                   placeholder="Enter course name" required></div>
                     </div>
                     <div class="row mt-4">
                         <div class="col-12">
-                            <input class="single-input" name="password" id="password" type="password"
-                                   placeholder="Enter your password" required>
+                            <h5>Enter course description</h5>
+                            <textarea class="single-input" name="courseDes" id="courseDes"
+                                   placeholder="Enter course description" required></textarea>
+                        </div>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-12">
+                            <h5>Select course field</h5>
+                            <select name="courseTags" id="courseTags" required>
+                                <option value="">Select</option>
+                                <option value="Chemistry">Chemistry</option>
+                                <option value="Biology">Biology</option>
+                                <option value="Mathematics">Mathematics</option>
+                                <option value="Language">Language</option>
+                                <option value="Economics">Economics</option>
+                                <option value="Photography">Photography</option>
+                            </select>
                         </div>
                     </div>
                     <div class="row mt-1">
@@ -79,7 +94,7 @@
                     </div>
                     <div class="row mt-4">
                         <div class="col-6">
-                            <button type="submit" class="button button-contactForm boxed-btn">Login</button>
+                            <button type="submit" class="button button-contactForm boxed-btn">Create</button>
                         </div>
                     </div>
                 </div>
@@ -125,7 +140,7 @@
 <!-- Jquery Plugins, main Jquery -->
 <script src="./assets/js/plugins.js"></script>
 <script src="./assets/js/main.js"></script>
-<script src="./assets/js/login.js"></script>
+<!--<script src="./assets/js/login.js"></script>-->
 
 </body>
 </html>
