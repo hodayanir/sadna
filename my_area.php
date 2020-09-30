@@ -82,7 +82,7 @@ if (mysqli_num_rows($res) > 0) {
 					<h3 class="mb-30"><span><?php echo ucfirst($first_name) , " ", ucfirst($last_name) ?></span></h3>
 					<div class="row">
 						<div class="col-md-3">
-							<img src="<?php echo $photo ?>" alt="" class="img-fluid">
+							<img src="<?php echo $photo ?>" alt="" class="img-fluid" height=300 width=200>
 							<form action="upload.php" method="post" enctype="multipart/form-data" style=font-size:12px;>
                             Select image to upload:
                             <input type="file" name="fileToUpload" id="fileToUpload">
@@ -110,10 +110,10 @@ if (mysqli_num_rows($res) > 0) {
 						        </div>
 					        </div>
 					<div class="section-top-border">
-					   <div class="row">
+					   <div class="form-group mt-4">
 					       </div>
 					       </div>
-					   <div class="row">
+					   <div class="form-group mt-4">
 					      <div class="col-lg-8 col-md-8">
 						  <div class="button-group-area mt-10">
 						  <a href="updateTeacherUI.php" class="genric-btn primary-border e-large">Edit Details</a>

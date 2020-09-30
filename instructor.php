@@ -1,9 +1,11 @@
 <?php
     include "mysqlConfig.php";
 
-    $sql_query="SELECT first_name,last_name FROM teachers";
+    $sql_query="SELECT first_name,last_name, photo FROM teachers";
     
     $res=mysqli_query($link, $sql_query);
+    
+    $defautPhoto='assets/img/profile_picture.png';
 ?>
 
 
@@ -77,7 +79,20 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="single-team mb-30">
                         <div class="team-img">
-                            <img src="assets/img/gallery/team1.png" alt="">
+                            
+                            <?php
+                            
+                            $teacherPhoto=$row['photo'];
+                            
+                            if ($teacherPhoto == NULL)
+                            
+                            echo "<img src='$defautPhoto' height=300 width=200>";
+                            
+                            else
+                            
+                            echo "<img src='$teacherPhoto' height=300 width=200>";
+                            
+                            ?>
                             <!-- Blog Social -->
                             <ul class="team-social">
                                 <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
@@ -86,7 +101,7 @@
                             </ul>
                         </div>
                         <div class="team-caption">
-                            <h3><a href="instructor.php"><?php echo $row['first_name'] , " ", $row['last_name']?></a></h3>
+                            <h3><a href="instructor.php"><?php echo ucfirst($row['first_name']) , " ", ucfirst($row['last_name'])?></a></h3>
                             <p>Faculty</p>
                         </div>
                     </div>

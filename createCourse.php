@@ -11,6 +11,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $insert_course = "INSERT INTO courses (name, description, tag, teacherEmail) VALUES ('$c_name', '$c_desc', '$c_tag','$t_email');";
     $res = mysqli_query($link, $insert_course);
 
-    header("Location: index.html");
+    header("Location: teacher_dashboard.php");
 
 }
