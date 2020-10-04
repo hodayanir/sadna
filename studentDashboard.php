@@ -4,10 +4,8 @@
     $myCourses = array();
     $u_email = $_COOKIE['email'];
 
-    $sql_query="SELECT courseCode, name, description, tag FROM courses WHERE teacherEmail='$u_email'";
-
+    $sql_query="select c.courseCode, c.tag, c.description, c.name from StudentInCourse s join courses c on s.courseCode= c.courseCode where studentEmail = '$u_email';";
     $res=mysqli_query($link, $sql_query);
-
 
 ?>
 <!doctype html>
@@ -67,7 +65,7 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="hero-cap hero-cap2 text-center">
-                            <h2>Teacher Dashboard</h2>
+                            <h2>Student Dashboard</h2>
                         </div>
                     </div>
                 </div>
@@ -83,12 +81,7 @@
                 <h3 class="mb-30"><span><?php echo $_COOKIE['first_name'], " ", $_COOKIE['last_name'] ?></span></h3>
                 <div class="row">
                     <div class="col-9">
-                        <h4>My Courses </h4>
-                    </div>
-                    <div class="col-3">
-                        <div class="col-12">
-                        <a href="createCourse.html" class="float-right genric-btn primary-border e-large">Add Course</a>
-                        </div>
+                        <h1>Continue Watch Courses</h1>
                     </div>
                 </div>
                 <div class="row">
@@ -129,12 +122,11 @@
                                                                                  echo '<img src="assets/img/course/mathematics.jpeg'.$photo->name.'"/>';}
                                                                             if ($row['tag'] == "Photography"){
                                                                                  echo '<img src="assets/img/course/photography.jpg'.$photo->name.'"/>';}
-                                                     
-                                                     ?>
+                                                                        ?>
                                                                     </div>
                                                                     <div class="course-caption">
                                                                         <div class="course-cap-top">
-                                                                            <h4><a href="/updateCourseUI.php?course_id=<?php echo $row['courseCode']?>"><?php echo $row['name']?></a></h4>
+                                                                            <h4><a href="/watchCourseUI.php?<?php echo "courseCode={$row['courseCode']}" ?>"><?php echo $row['name']?></a></h4>
                                                                         </div>
                                                                     </div>
                                                                 </div>

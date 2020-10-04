@@ -1,18 +1,40 @@
 <?php
 include "mysqlConfig.php";
-$courseCode = $_GET["course_id"];
+$courseCode = $_GET["courseCode"];
+
 $u_email = $_COOKIE['email'];
 
+$lessonCode = '';
+if(isset($_GET['lessonCode'])) {
+    $lessonCode = $_GET['lessonCode'];
+}
 
-$sql_query = "SELECT courses.courseCode, name, description, l.lessonCode, l.lessonName, l.lessonLink, l.lessonLength FROM courses LEFT JOIN lessons l on courses.courseCode = l.courseCode WHERE courses.courseCode='$courseCode'";
+$sql_query = "SELECT courses.courseCode, name, l.lessonCode, l.lessonName, l.lessonLink, l.lessonLength 
+              FROM courses 
+              LEFT JOIN lessons l 
+              ON courses.courseCode = l.courseCode 
+              WHERE courses.courseCode='$courseCode'";
 
 $res = mysqli_query($link, $sql_query);
 $lessons = array();
+
+$courseName = '';
+$currentLessonName = '';
+$currentLessonLink = '';
+$currentLessonLength = '';
 while ($row = mysqli_fetch_assoc($res)) {
-    $courseCode = $row['courseCode'];
     $courseName = $row['name'];
-    $courseDescription = $row['description'];
     $lessons[] = $row;
+    if($lessonCode == '' & $currentLessonName == ''){
+        $currentLessonName = $row['lessonName'];
+        $currentLessonLink = $row['lessonLink'];
+        $currentLessonLength = $row['lessonLength'];
+    }
+    else if ($row['lessonCode'] == $lessonCode) {
+        $currentLessonName = $row['lessonName'];
+        $currentLessonLink = $row['lessonLink'];
+        $currentLessonLength = $row['lessonLength'];
+    }
 }
 
 
@@ -74,15 +96,34 @@ while ($row = mysqli_fetch_assoc($res)) {
         </div>
     </div>
     <!-- Hero End -->
-    <!-- ================ Login section start ================= -->
     <section class="contact-section">
-        <div class="container">
+        <div class="col-12">
             <div class="row">
+
+                <div class="col-8">
+                    <div class="row">
+                        <div class="col-12">
+                            <h1>
+                                <?php echo $currentLessonName ?> <span><i
+                                            class="ti-time"></i> <?php echo $currentLessonLength ?> </span>
+                            </h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe class="embed-responsive-item" src="<?php echo $currentLessonLink ?>"
+                                        allowfullscreen></iframe>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
                 <div class="col-4">
                     <div class="row">
-                        <h2>
+                        <h1>
                             Lessons
-                        </h2>
+                        </h1>
                     </div>
                     <div class="row">
                         <ul>
@@ -91,7 +132,7 @@ while ($row = mysqli_fetch_assoc($res)) {
                                     <h4>
                                         <span><i class="ti-time"></i> <?php echo $row['lessonLength'] ?> </span>
                                         <a class="color-blue"
-                                           href="/updateLessonUI.php?lesson_id=<?php echo $row['lessonCode'] ?>"><?php echo $row['lessonName'] ?></a>
+                                           href="/watchCourseUI.php?<?php echo "lessonCode={$row['lessonCode']}&courseCode={$row['courseCode']}" ?>"><?php echo $row['lessonName'] ?></a>
                                     </h4>
 
                                 </li>
@@ -99,25 +140,9 @@ while ($row = mysqli_fetch_assoc($res)) {
                         </ul>
                     </div>
                 </div>
-                <div class="col-8">
-                    <div class="row">
-                        <h2>
-                            <?php echo $current_lesson_name?> (<span><i class="ti-time"></i> <?php echo $current_lesson_time ?> </span>)
-                        </h2>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="embed-responsive embed-responsive-16by9">
-                                <iframe class="embed-responsive-item" src="<?php echo $current_lesson_link ?>" allowfullscreen></iframe>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
             </div>
-            </div>
+        </div>
     </section>
-    <!-- ================ contact section end ================= -->
 </main>
 
 <footer id="footer-wrapper"></footer>

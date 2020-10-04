@@ -17,9 +17,9 @@ function set_header_content(){
               </li>
           </ul>`
     )
-    let link = 'watchCourseUI.php'
+    let link = 'studentDashboard.php'
     if (cookie['user_type'] === 'teachers'){
-      link = 'teacher_dashboard.php'
+      link = 'teacherDashboard.php'
     }
 
     $("#dashboard_button").attr('href', link)

@@ -6,7 +6,6 @@ var GroupSelectionMode = 0;
 var CurrentViewMode;
 var SelectedTeacher;
 var DateISO;
-var user = (document.getElementById("header")).innerHTML;
 var element;
 var DATE = new Date();
 var SelectedDate = new Date();

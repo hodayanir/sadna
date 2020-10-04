@@ -1,101 +1,26 @@
 <?php
 
-/*
-$conn_server = "localhost";
-$conn_user = "root";
-$conn_password = "root";
-$database="business";
 
-$conn = mysqli_connect($conn_server, $conn_user, $conn_password, $database);
-
-if (!$conn) {die("Connection failed: " . mysqli_connect_error() . "<br>");}
-*/
-/*
-class DBi {
-  public static $conn;
-}
-DBi::$conn = mysqli_connect('localhost', "root", "root", "business");
-
-if (!(DBi::$conn)) {die("Connection failed: " . mysqli_connect_error() . "<br>");}
-
-$conn = DBi::$conn;
-*/
 
 session_start();
 
-$_SESSION['CONNECTION_SERVER'] = 'fdb29.awardspace.net';
-$_SESSION['CONNECTION_USER'] = '3560186_mirit';
-$_SESSION['CONNECTION_PASSWORD'] = 'lavkanit2020';
-$_SESSION['CONNECTION_DATABASE'] = '3560186_mirit';
+include "../mysqlConfig.php";
+$username = $_COOKIE["first_name"];
+?>
 
-$conn_server = $_SESSION['CONNECTION_SERVER'];
-$conn_user = $_SESSION['CONNECTION_USER'];
-$conn_password = $_SESSION['CONNECTION_PASSWORD'];
-$database = $_SESSION['CONNECTION_DATABASE'];
-
-$conn = mysqli_connect($conn_server, $conn_user, $conn_password, $database);
-if (!$conn) die("Connection failed: " . mysqli_connect_error() . "<br>");
-
-
-if (isset($_POST['username'])){
-
-$logged_user = 0;
-
-  $username = $_POST['username'];
-  $password = $_POST['password'];
-
-  $sql = "SELECT username, password FROM users";
-  $result = mysqli_query($conn, $sql);
-  $found_user = 0;
-
-  while($row = mysqli_fetch_assoc($result)) {
-       if($username == $row['username']){
-         $found_user = 1;  // valid username
-         if($password == $row['password']){
-           $logged_user = 1;  // correct password
-           break;
-         }
-       }
-  }
-  if (!($found_user)){ // User does not exist
-    header("Location: index.php?user=0&pw=0");
-  }
-  if ($found_user && (!($logged_user))){ // Wrong password
-    header("Location: index.php?user=1&pw=0");
-  }
-  if ($logged_user){ // Start session for this user if login was successful
-    $_SESSION['username'] = $username;
-  }
-}
-else{  // User has already logged in
-  if(isset($_SESSION['username'])){
-    $username = $_SESSION['username'];
-    $logged_user = 1;
-  }
-  else{ // User got to this page in an unintended way
-    header("Location: index.php");
-  }
-}
-if($username == "eyal" || $username == "michal"){
-  $_SESSION['admin'] = 1;
-  $admin = 1;
-}
-else{
-  unset($_SESSION['admin']);
-  $admin = 0;
-}
- ?>
 <!DOCTYPE html>
 <html>
 <head>
   <link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="schedule.css?version=<?php echo time()?>">
-
+    <script type="text/javascript">
+        var user = "<?php echo $username ?>";
+    </script>
 </head>
 <body>
 <nav>
   <span>
-  <a href="index.php" class="whitebutton">< Home</a>
+  <a href="../index.html" class="whitebutton">< Home</a>
   </span>
   <span id="navdate">DATE</span>
 </nav>
@@ -103,7 +28,7 @@ else{
 <main id="schedule">
   <div id="welcomewindow" class="bottom-gray-border">
     <div id="welcomecontainer">
-      <span class="headline">Welcome, <?php echo "{$username}!"; ?></span>
+      <span class="headline">Welcome <?php echo "{$username}!"; ?></span>
       <br>
       <span><?php
   if($admin){
@@ -191,18 +116,15 @@ else{
         <div id="confirmdata">
           <p id="confirmFieldUser">
           <?php
-            if($admin){
-              echo '<select id="AdminUserSelectBox" onchange="AdminSetUser()">
-                      <option disabled selected>Select a student</option>';
-              //Fill the option list with students:
-              $sql = "SELECT username FROM users";
-              $result = mysqli_query($conn, $sql);
-              while($row = mysqli_fetch_assoc($result)) {
-                  echo '<option>' . $row['username'] . '</option>'; 
-                }
-              echo '</select>';
+            
+            if (isset($_COOKIE["first_name"])){
+            echo $username;
             }
-            else echo '.';
+            else {
+            echo  "Guest";
+            }
+                
+                
           ?>
           <span id="confirmFieldUserGroup"></span>
           </p>
@@ -245,9 +167,17 @@ else{
   <div id="selectorsbar" class="bottom-gray-border">
     <div id="teacherselect" class="selectors">
       Teacher: <br class="teacherlinebreak"><br class="teacherlinebreak">
-      <span id="teacherEyal" name="teacher" value="Eyal" onclick="TeacherSelect('Eyal')" class="somebutton redfont redhover redselected">Eyal</span>
-      <span id="teacherJenny" name="teacher" value="Jenny" onclick="TeacherSelect('Jenny')" class="somebutton redfont redhover">Jenny</span>
-      <span id="teacherMendel" name="teacher" value="Mendel" onclick="TeacherSelect('Mendel')" class="somebutton redfont redhover">Mendel</span>
+<?php
+      $sql = "SELECT first_name FROM teachers";
+              $result = mysqli_query($link, $sql);
+              while($row = $result->fetch_assoc())
+              {
+                echo "<span id='teacher$row[first_name]' name='teacher' value='$row[first_name]' onclick=TeacherSelect('$row[first_name]') class='somebutton redfont redhover redselected'> $row[first_name]</span>";
+
+
+              }
+              
+?>      
     </div>
     <div id="viewselect" class="selectors">
       View Mode:
@@ -306,7 +236,7 @@ else{
                     ';
               //Fill the checkbox list with students:
               $sql = "SELECT username FROM users";
-              $result = mysqli_query($conn, $sql);
+              $result = mysqli_query($link, $sql);
               while($row = mysqli_fetch_assoc($result))
               {
                 echo '<input type="checkbox" onclick="EnableAlertButton()" value=' . $row['username'] . '>' . $row['username'] . '</input>';
