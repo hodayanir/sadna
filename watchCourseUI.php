@@ -104,8 +104,7 @@ while ($row = mysqli_fetch_assoc($res)) {
                     <div class="row">
                         <div class="col-12">
                             <h1>
-                                <?php echo $currentLessonName ?> <span><i
-                                            class="ti-time"></i> <?php echo $currentLessonLength ?> </span>
+                                <?php echo $currentLessonName ?>
                             </h1>
                         </div>
                     </div>

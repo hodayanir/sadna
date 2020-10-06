@@ -3,12 +3,14 @@
 
     $myCourses = array();
 
-    $sql_query="SELECT name,tag FROM courses";
+    $sql_query="SELECT name,tag,courseCode FROM courses";
+    $res=mysqli_query($link, $sql_query);
     
 
-    $res=mysqli_query($link, $sql_query);
 
-echo $row['name'];
+    
+
+
 ?>
 
 <!doctype html>
@@ -16,7 +18,7 @@ echo $row['name'];
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title> Education | Template </title>
+    <title> TMO | Courses </title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
@@ -89,7 +91,7 @@ echo $row['name'];
                                         
                                         <?php
                                         while($row = mysqli_fetch_assoc($res)){ 
-                                        $course_code = $row['courseCode'] ;?>
+                                        $course_code = $row['courseCode'];?>
                                         
                                         <div class="col-xl-4 col-lg-4 col-md-6">
                                              
@@ -103,7 +105,7 @@ echo $row['name'];
                                                     if ($row['tag'] == "Chemistry"){
                                                          echo '<img src="assets/img/course/chemistry.jpg'.$photo->name.'"/>';}
                                                     if ($row['tag'] == "Economics"){
-                                                         echo '<img src="assets/img/course/economics.png'.$photo->name.'"/>';}
+                                                         echo '<img src="assets/img/course/economics.jpg". width="400" height="255"/>';}
                                                     if ($row['tag'] == "Language"){
                                                          echo '<img src="assets/img/course/language.jpg'.$photo->name.'"/>';}
                                                     if ($row['tag'] == "Mathematics"){
@@ -112,12 +114,11 @@ echo $row['name'];
                                                          echo '<img src="assets/img/course/photography.jpg'.$photo->name.'"/>';}
                                                      
                                                      ?>
-                                                         
-                                                    
+
                                                 </div>
                                                 <div class="course-caption">
                                                     <div class="course-cap-top">
-                                                        <h4><a href="/course_details.php"><?php echo $row['name']?></a></h4>
+                                                        <h4><a href="/course_details.php?course_id=<?php echo $row['courseCode']?>"><?php echo $row['name']?></a></h4>
                                                     </div>
                                                     <div class="course-cap-mid d-flex justify-content-between">
                                                         <div class="course-ratting">
@@ -135,9 +136,9 @@ echo $row['name'];
                                                         <ul>
                                                             <li><i class="ti-user"></i> <?php $sql_query2="SELECT comment FROM Course_Reviews WHERE courseCode ='$course_code'";
                                                                 $result =$link->query($sql_query2);
-                                                                if ($result->num_rows>0){
-                                                              
-                                                                echo num_rows;
+                                                                if ( $result->num_rows>0){
+                                                                $row_cnt = $result->num_rows;
+                                                                echo $row_cnt;
                                                                 echo " reviews";}
                                                                 else echo "0 reviews";
                                                              

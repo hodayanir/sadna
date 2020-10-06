@@ -3,9 +3,15 @@
 
     $myCourses = array();
     $u_email = $_COOKIE['email'];
+    $u_firstName = $_COOKIE['first_name'];
+    $u_lastName = $_COOKIE['last_name'];
+
 
     $sql_query="select c.courseCode, c.tag, c.description, c.name from StudentInCourse s join courses c on s.courseCode= c.courseCode where studentEmail = '$u_email';";
     $res=mysqli_query($link, $sql_query);
+
+    $sql_query_private_l ="select pLessonDate, pLessonTime, teacherEmail, studentEmail, teachers.first_name as tFirstName, teachers.last_name as tLastName from privateLessons INNER JOIN teachers ON privateLessons.teacherEmail=teachers.email";
+    $res_private = mysqli_query($link, $sql_query_private_l);
 
 ?>
 <!doctype html>
@@ -140,6 +146,27 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-9">
+                                        <h4>Next Private Lessons</h4>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <ul >
+                                            <?php
+                                            while($row_private = mysqli_fetch_assoc($res_private)){
+                                            ?>
+                                            <li>
+                                                <br>
+                                                <h5><?php echo "# date: ". $row_private['pLessonDate'] . "&nbsp&nbsp&nbsp" . " time: " . $row_private['pLessonTime'] . "&nbsp&nbsp&nbsp". " teacher: " . $row_private['tFirstName'] .  $row_private['tLastName'] ."&nbsp&nbsp&nbsp" . " student: " . $u_firstName . " " . $u_lastName  ?></h5>
+                                            </li>
+                                            <?php    } ?>
+                                        </ul>
+
+                                    </div>
+                                </div>
+
                             </div>
                         </section>
                     </div>

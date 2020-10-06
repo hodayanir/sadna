@@ -1,12 +1,17 @@
 <?php
-    include "mysqlConfig.php";
+include "mysqlConfig.php";
 
-    $myCourses = array();
-    $u_email = $_COOKIE['email'];
+$myCourses = array();
+$u_email = $_COOKIE['email'];
+$u_firstName = $_COOKIE['first_name'];
+$u_lastName = $_COOKIE['last_name'];
 
-    $sql_query="SELECT courseCode, name, description, tag FROM courses WHERE teacherEmail='$u_email'";
+$course_query = "SELECT courseCode, name, description, tag FROM courses WHERE teacherEmail='$u_email'";
+$res = mysqli_query($link, $course_query);
 
-    $res=mysqli_query($link, $sql_query);
+$sql_query_private_l ="select pLessonDate, pLessonTime, teacherEmail, studentEmail, students.first_name as sFirstName, students.last_name as sLastName from privateLessons INNER JOIN students ON privateLessons.studentEmail=students.email";
+$res_private = mysqli_query($link, $sql_query_private_l);
+
 ?>
 <!doctype html>
 <html class="no-js" lang="zxx">
@@ -85,7 +90,8 @@
                     </div>
                     <div class="col-3">
                         <div class="col-12">
-                        <a href="createCourse.html" class="float-right genric-btn primary-border e-large">Add Course</a>
+                            <a href="createCourse.html" class="float-right genric-btn primary-border e-large">Add
+                                Course</a>
                         </div>
                     </div>
                 </div>
@@ -105,39 +111,47 @@
                                                          aria-labelledby="nav-home-tab">
                                                         <div class="row">
                                                             <?php
-                                                                while($row = mysqli_fetch_assoc($res)) {
-                                                            ?>
+                                                            while ($row = mysqli_fetch_assoc($res)) {
+                                                                ?>
 
-                                                            <div class="col-4">
-                                                                <!-- Single course -->
-                                                                <div class="single-course mb-70">
-                                                                    <div class="course-img">
-                                                                       <?php if ($row['tag'] == "Art"){
-                                                                         echo '<img src="assets/img/course/Art.jpg'.$photo->name.'"/>';
-                                                                          }
-                                                                          if ($row['tag'] == "Biology"){
-                                                                                 echo '<img src="assets/img/course/biology.png'.$photo->name.'"/>';}
-                                                                            if ($row['tag'] == "Chemistry"){
-                                                                                 echo '<img src="assets/img/course/chemistry.jpg'.$photo->name.'"/>';}
-                                                                            if ($row['tag'] == "Economics"){
-                                                                                 echo '<img src="assets/img/course/economics.png'.$photo->name.'"/>';}
-                                                                            if ($row['tag'] == "Language"){
-                                                                                 echo '<img src="assets/img/course/language.jpg'.$photo->name.'"/>';}
-                                                                            if ($row['tag'] == "Mathematics"){
-                                                                                 echo '<img src="assets/img/course/mathematics.jpeg'.$photo->name.'"/>';}
-                                                                            if ($row['tag'] == "Photography"){
-                                                                                 echo '<img src="assets/img/course/photography.jpg'.$photo->name.'"/>';}
-                                                     
-                                                     ?>
-                                                                    </div>
-                                                                    <div class="course-caption">
-                                                                        <div class="course-cap-top">
-                                                                            <h4><a href="/updateCourseUI.php?course_id=<?php echo $row['courseCode']?>"><?php echo $row['name']?></a></h4>
+                                                                <div class="col-4">
+                                                                    <!-- Single course -->
+                                                                    <div class="single-course mb-70">
+                                                                        <div class="course-img">
+                                                                            <?php if ($row['tag'] == "Art") {
+                                                                                echo '<img src="assets/img/course/Art.jpg' . $photo->name . '"/>';
+                                                                            }
+                                                                            if ($row['tag'] == "Biology") {
+                                                                                echo '<img src="assets/img/course/biology.png' . $photo->name . '"/>';
+                                                                            }
+                                                                            if ($row['tag'] == "Chemistry") {
+                                                                                echo '<img src="assets/img/course/chemistry.jpg' . $photo->name . '"/>';
+                                                                            }
+                                                                            if ($row['tag'] == "Economics") {
+                                                                                echo '<img src="assets/img/course/economics.png' . $photo->name . '"/>';
+                                                                            }
+                                                                            if ($row['tag'] == "Language") {
+                                                                                echo '<img src="assets/img/course/language.jpg' . $photo->name . '"/>';
+                                                                            }
+                                                                            if ($row['tag'] == "Mathematics") {
+                                                                                echo '<img src="assets/img/course/mathematics.jpeg' . $photo->name . '"/>';
+                                                                            }
+                                                                            if ($row['tag'] == "Photography") {
+                                                                                echo '<img src="assets/img/course/photography.jpg' . $photo->name . '"/>';
+                                                                            }
+
+                                                                            ?>
+                                                                        </div>
+                                                                        <div class="course-caption">
+                                                                            <div class="course-cap-top">
+                                                                                <h4>
+                                                                                    <a href="/updateCourseUI.php?course_id=<?php echo $row['courseCode'] ?>"><?php echo $row['name'] ?></a>
+                                                                                </h4>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <?php    } ?>
+                                                            <?php } ?>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -146,12 +160,36 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-9">
+                                        <h4>Next Private Lessons</h4>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <ul>
+                                            <?php
+                                            while($row_private = mysqli_fetch_assoc($res_private)){
+                                                ?>
+                                                <li>
+                                                    <br>
+                                                    <h5><?php echo "# date: ". $row_private['pLessonDate'] . "&nbsp&nbsp&nbsp" . " time: " . $row_private['pLessonTime'] . "&nbsp&nbsp&nbsp". " teacher: " . $u_firstName . " " . $u_lastName ."&nbsp&nbsp&nbsp" . " student: " . $row_private['sFirstName']." ". $row_private['sLastName']  ?></h5>
+                                                </li>
+                                            <?php    } ?>
+
+                                        </ul>
+
+                                    </div>
+                                </div>
                             </div>
+
                         </section>
                     </div>
                 </div>
             </div>
         </div>
+
+    </div>
     </div>
     <!-- End Align Area -->
 </main>

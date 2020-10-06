@@ -3,12 +3,12 @@
 include "mysqlConfig.php";
 $resObj = new stdClass();
 
-$first_name = $_COOKIE['first_name'];
-$last_name = $_COOKIE['last_name'];
+//$first_name = $_COOKIE['first_name'];
+//$last_name = $_COOKIE['last_name'];
 $email = $_COOKIE['email'];
 
-$sql_query="SELECT country, address, phone, description, photo FROM teachers WHERE (email='$email') 
-            UNION SELECT country, address, phone, description, photo FROM students WHERE (email='$email')";
+$sql_query="SELECT country, address, phone, description, photo, teachers.first_name , teachers.last_name FROM teachers WHERE (email='$email') 
+            UNION SELECT country, address, phone, description, photo, students.first_name, students.last_name FROM students WHERE (email='$email')";
 $res=mysqli_query($link, $sql_query);
 if (mysqli_num_rows($res) > 0) {
     $row = mysqli_fetch_row($res);
@@ -17,6 +17,8 @@ if (mysqli_num_rows($res) > 0) {
     $phone = $row[2];
     $description = $row[3];
     $photo = $row[4];
+    $first_name = $row[5];
+    $last_name = $row[6];
 }
 ?>
 
@@ -117,7 +119,7 @@ if (mysqli_num_rows($res) > 0) {
 					      <div class="col-lg-8 col-md-8">
 						  <div class="button-group-area mt-10">
 						  <a href="updateTeacherUI.php" class="genric-btn primary-border e-large">Edit Details</a>
-						  <a href="change_teacher_pass.html" class="genric-btn primary-border e-large">Change Password</a>
+						  <a href="changePass.html" class="genric-btn primary-border e-large">Change Password</a>
                          </div>
 				         </div>
 			           </div>

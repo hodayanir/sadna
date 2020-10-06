@@ -17,6 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         setcookie('last_name', $row[2]);
         setcookie('user_type', $row[3]);
         $resObj->response = "Success";
+        $resObj->user_type = $row[3];
     }
     else {
         $resObj->response = "Fail";

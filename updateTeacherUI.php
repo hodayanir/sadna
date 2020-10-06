@@ -2,11 +2,11 @@
 include "mysqlConfig.php";
 
 $t_email = $_COOKIE['email'];
-$first_name = $_COOKIE['first_name'];
-$last_name = $_COOKIE['last_name'];
+//$first_name = $_COOKIE['first_name'];
+//$last_name = $_COOKIE['last_name'];
 
-$sql_query = $sql_query="SELECT country, address, phone, description, photo FROM teachers WHERE (email='$t_email') 
-UNION SELECT country, address, phone, description, photo FROM students WHERE (email='$t_email');";
+$sql_query="SELECT country, address, phone, description, photo, teachers.first_name , teachers.last_name FROM teachers WHERE (email='$t_email') 
+            UNION SELECT country, address, phone, description, photo, students.first_name, students.last_name FROM students WHERE (email='$t_email');";
 $res = mysqli_query($link, $sql_query);
 $res=mysqli_query($link, $sql_query);
 if (mysqli_num_rows($res) > 0) {
@@ -15,6 +15,9 @@ if (mysqli_num_rows($res) > 0) {
     $address = $row[1];
     $phone = $row[2];
     $description = $row[3];
+    $first_name = $row[5];
+    $last_name = $row[6];
+
 }
 ?>
 

@@ -2533,6 +2533,10 @@ hr {
     color: #fff
 }
 
+li a:hover {
+    color: #2d3092 !important;
+}
+
 .header-area .header-top .header-left-social .header-social li a:hover i {
     transform: rotateY(180deg)
 }

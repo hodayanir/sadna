@@ -2,11 +2,11 @@
  include "mysqlConfig.php";
 
  # set variables #
-    $from = 'tmo.s3345@gmail.com';
-    $email = $_REQUEST['email'];
-    $name = $_REQUEST['name'];
-    $subject = $_REQUEST['subject'];
-    $message = $_REQUEST['message'];
+    $from = "tmo.s3345@gmail.com";
+    $email = $_POST["email"];
+    $name = $_POST["name"];
+    $subject = $_POST["subject"];
+    $message = $_POST["message"];
 
 
 #insert to DB #
@@ -69,27 +69,13 @@ $res=mysqli_query($link, $insert_query_contact);
     <link rel="stylesheet" href="assets/css/slick.css">
     <link rel="stylesheet" href="assets/css/nice-select.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     
 </head>
     <!--? Preloader Start -->
-    <div id="preloader-active">
-        <div class="preloader d-flex align-items-center justify-content-center">
-            <div class="preloader-inner position-relative">
-                <div class="preloader-circle"></div>
-                <div class="preloader-img pere-text">
-                    <img src="assets/img/logo/loder.png" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Preloader Start -->
-    <header> 
-    <ol id="top-page"; style="padding-left: 0px;"></ol>
-
-    <script>
-        $( "#top-page" ).load( "index.html #top-page" );
-    </script>
-    </header>    <main>
+    <header id="header-wrapper"></header>
+    
+<main>
         <!--? Hero Start -->
         <div class="slider-area ">
             <div class="slider-height2 d-flex align-items-center">
@@ -117,13 +103,7 @@ $res=mysqli_query($link, $insert_query_contact);
         </section>
         <!-- ================ contact section end ================= -->
     </main>
-    <footer>
-    <ol id="down-page"; style="padding-left: 0px;"></ol>
-
-    <script>
-        $( "#down-page" ).load( "index.html #down-page" );
-    </script>
-    </footer>
+    <footer id="footer-wrapper"></footer>
     <!-- JS here -->
 
     <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>

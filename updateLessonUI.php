@@ -66,7 +66,7 @@ while ($row = mysqli_fetch_assoc($res)) {
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="hero-cap hero-cap2 text-center">
-                            <h2><?php echo $lessonName ?></h2>
+                            <h2><?php echo ucfirst($lessonName) ?></h2>
                         </div>
                     </div>
                 </div>
