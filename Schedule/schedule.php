@@ -20,7 +20,7 @@ $username = $_COOKIE["first_name"];
 <body>
 <nav>
   <span>
-  <a href="../index.html" class="whitebutton">< Home</a>
+  <a href="../studentDashboard.php" class="whitebutton">< Home</a>
   </span>
   <span id="navdate">DATE</span>
 </nav>

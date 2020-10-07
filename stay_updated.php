@@ -7,11 +7,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $c_id = $_POST["courseCode"];
     $resObj = new stdClass();
     
-    $sql1="SELECT email FROM StayUpdated WHERE email=$email;";
+    if(empty($email)){
+                echo"<script>
+                if (window.confirm('You are not logged in! Would you like to move to the login page?'))
+                {
+                  window.location.href = 'http://omerho-is.mtacloud.co.il/login.html';
+                    
+                }
+                else
+                {
+                     window.history.back();
+            
+                }
+                </script>";
+            }  
+    
+   else{ 
+    
+    
+    $sql1="SELECT email FROM StayUpdated WHERE email= '$email';";
      
      $res = mysqli_query($link, $sql1);
       
-    if ($res->num_rows == 0){
+    if ($res-> num_rows == 0){
     $insert_email = "INSERT INTO StayUpdated (email) VALUES ('$email');";
     $res = mysqli_query($link, $insert_email);
     
@@ -29,14 +47,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo"<script>
                 if (window.confirm('Conformation email was sent sucessfuly!'))
                 {
-                  window.location.href = 'Location: course_details.php?course_id=$c_id';
-                    
+                  
+    
+                     window.history.back();
                 }
+
                 else
                 {
-                     window.location.href = 'Location: course_details.php?course_id=$c_id';
-
+                    
+                     window.history.back();
                 }
+
                 </script>";
                 
             }
@@ -51,12 +72,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo"<script>
                 if (window.confirm('YAY! You are already in the list!'))
                 {
-                  window.location.href = 'Location: course_details.php?course_id=$c_id';
+                 
+                     window.history.back();
                     
                 }
                 else
                 {
-                     window.location.href = 'Location: course_details.php?course_id=$c_id';
+                     
+                     window.history.back();
+
 
                 }
                 </script>";
@@ -68,7 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } 
         
         
-
+}
     
     
 

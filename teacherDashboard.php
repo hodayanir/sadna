@@ -9,7 +9,9 @@ $u_lastName = $_COOKIE['last_name'];
 $course_query = "SELECT courseCode, name, description, tag FROM courses WHERE teacherEmail='$u_email'";
 $res = mysqli_query($link, $course_query);
 
-$sql_query_private_l ="select pLessonDate, pLessonTime, teacherEmail, studentEmail, students.first_name as sFirstName, students.last_name as sLastName from privateLessons INNER JOIN students ON privateLessons.studentEmail=students.email";
+$sql_query_private_l = "select p.pLessonDate, p.pLessonTime, p.teacherEmail, p.studentEmail, t.zoom, s.first_name as sFirstName, s.last_name as sLastName
+                        from students s, teachers t, privateLessons p
+                        where (p.studentEmail=s.email and t.first_name = p.teacherEmail) and (p.studentEmail='$u_email' OR p.teacherEmail = '$u_firstName')";
 $res_private = mysqli_query($link, $sql_query_private_l);
 
 ?>
@@ -18,7 +20,7 @@ $res_private = mysqli_query($link, $sql_query_private_l);
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title> Education | Template </title>
+    <title> TMO |Teacher Dashboard </title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
@@ -83,10 +85,11 @@ $res_private = mysqli_query($link, $sql_query_private_l);
     <div class="whole-wrap">
         <div class="container box_1170">
             <div class="section-top-border">
-                <h3 class="mb-30"><span><?php echo $_COOKIE['first_name'], " ", $_COOKIE['last_name'] ?></span></h3>
+                <h5 class="mb-30"><span>Welcome, <?php echo $_COOKIE['first_name'], " ", $_COOKIE['last_name'] ?></span>
+                </h5>
                 <div class="row">
                     <div class="col-9">
-                        <h4>My Courses </h4>
+                        <h2 class="mb-30"><strong>My Courses</strong></h2>
                     </div>
                     <div class="col-3">
                         <div class="col-12">
@@ -128,7 +131,7 @@ $res_private = mysqli_query($link, $sql_query_private_l);
                                                                                 echo '<img src="assets/img/course/chemistry.jpg' . $photo->name . '"/>';
                                                                             }
                                                                             if ($row['tag'] == "Economics") {
-                                                                                echo '<img src="assets/img/course/economics.png' . $photo->name . '"/>';
+                                                                                echo '<img src="assets/img/course/economics.jpg' . $photo->name . '"/>';
                                                                             }
                                                                             if ($row['tag'] == "Language") {
                                                                                 echo '<img src="assets/img/course/language.jpg' . $photo->name . '"/>';
@@ -160,28 +163,41 @@ $res_private = mysqli_query($link, $sql_query_private_l);
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-9">
-                                        <h4>Next Private Lessons</h4>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <ul>
+
+                                <div class="section-top-border">
+
+
+                                    <h3 class="mb-30">Next Private Lessons</h3>
+
+                                    <div class="progress-table-wrap">
+                                        <div class="progress-table">
+                                            <div class="table-head">
+                                                <div class="serial">#</div>
+                                                <div class="visit">First Name</div>
+                                                <div class="visit">Last Name</div>
+                                                <div class="visit">Hour</div>
+                                                <div class="visit">Date</div>
+                                                <div class="visit">Zoom Link</div>
+                                            </div>
+
+
                                             <?php
-                                            while($row_private = mysqli_fetch_assoc($res_private)){
-                                                ?>
-                                                <li>
-                                                    <br>
-                                                    <h5><?php echo "# date: ". $row_private['pLessonDate'] . "&nbsp&nbsp&nbsp" . " time: " . $row_private['pLessonTime'] . "&nbsp&nbsp&nbsp". " teacher: " . $u_firstName . " " . $u_lastName ."&nbsp&nbsp&nbsp" . " student: " . $row_private['sFirstName']." ". $row_private['sLastName']  ?></h5>
-                                                </li>
-                                            <?php    } ?>
-
-                                        </ul>
+                                            while ($row_private = mysqli_fetch_assoc($res_private)) { ?>
+                                                <div class="table-row">
+                                                    <div class="serial">#</div>
+                                                    <div class="visit"> <?php echo $row_private['sFirstName'] ?></div>
+                                                    <div class="visit"> <?php echo $row_private['sLastName'] ?></div>
+                                                    <div class="visit"><?php echo $row_private['pLessonTime'] ?></div>
+                                                    <div class="visit"><?php echo $row_private['pLessonDate'] ?></div>
+                                                    <div class="visit"><?php echo $row_private['zoom'] ?></div>
+                                                </div>
+                                            <?php } ?>
+                                        </div>
 
                                     </div>
+
+
                                 </div>
-                            </div>
 
                         </section>
                     </div>

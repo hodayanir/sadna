@@ -8,11 +8,13 @@ include "../mysqlConfig.php";
 
 // Declare variables:
 $user = $_COOKIE["first_name"];
+$student_email = $_COOKIE["email"];
 $date = $_GET['date'];
 $time = $_GET['time'];
 $teacher = $_GET['teacher'];
 $duration = $_GET['duration'];
 $lessontype = $_GET['lessontype'];
+
 
 // Only run with valid input:
 if ($user && $date && $time && $teacher){
@@ -30,6 +32,9 @@ if ($user && $date && $time && $teacher){
     // Create lesson if it doesn't conflict:
     else
     {
+        $sql3 = "insert into privateLessons (pLessonDate, pLessonTime, studentEmail, teacherEmail) values('$date', '$time', '$student_email', '$teacher');";
+        $result3 = mysqli_query($link, $sql3);
+
         $sql1 = "INSERT INTO schedule{$teacher} (username, date, time, duration, lessontype, paid) VALUES ('$user', '$date', '$time', '$duration', '$lessontype', 0)";
 
         if (mysqli_query($link, $sql1)) {

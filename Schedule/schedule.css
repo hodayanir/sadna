@@ -95,8 +95,8 @@ nav{
   border-radius:50%;
 }
 .todaysquare{
-  background-color: rgb(242, 85, 44) !important;
-  border-color: rgb(242, 85, 44) !important;
+  background-color: #2d3092 !important;
+  border-color: #2d3092 !important;
   color: white !important;
 }
 /*-------------------------------------------------*/
@@ -208,9 +208,9 @@ nav{
   border-color:black;
 }
 .redselected{
-  background-color:rgb(242, 85, 44);
+  background-color:#2d3092;
   color:white !important;
-  border-color:rgb(242, 85, 44);
+  border-color:#2d3092;
 }
 .grayselected{
   background-color: #9098a948;
@@ -273,9 +273,9 @@ nav{
  /*-------------------------------------------*/
 
 .redhover:hover{
-  background-color: rgb(242, 85, 44);
+  background-color: #2d3092;
   color:white !important;
-  border-color: rgb(242, 85, 44);
+  border-color: #2d3092;
   cursor:pointer;
 }
 .grayhover:hover{
@@ -284,8 +284,8 @@ nav{
   cursor: pointer;
 }
 .redfont {
-  color: rgb(242, 85, 44);
-  border-color: rgb(242, 85, 44);
+  color: #2d3092;
+  border-color: #2d3092;
 }
 .last-apt{
   border-radius:0 0 1vmax 0;
@@ -384,8 +384,8 @@ footer{
 .alertbutton{
   width:10%;
   text-align:center;
-  color: rgb(242, 85, 44);
-  border-color: rgb(242, 85, 44);
+  color: #2d3092;
+  border-color: #2d3092;
 }
 #AdminGroupCheckboxes{
   display: grid;
@@ -538,7 +538,7 @@ footer{
 
 .tooltiptext:hover
 {
-  color:rgb(242, 85, 44);
+  color:#2d3092;
 }
 
 /* --- LOADING ANIMATION --- */

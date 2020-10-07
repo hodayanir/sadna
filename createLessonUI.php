@@ -76,7 +76,7 @@ $courseCode = $_GET["course_id"];
                     </div>
                     <div class="row mt-4">
                         <div class="col-12">
-                            <h5>Lesson link:</h5>
+                            <h5 style=display:inline-block>Lesson link:</h5><a href="assets/pdf/how to upload youtube link to TMO_pdf.pdf" target="_blank" class="genric-btn primary-border small" style=float:right>Help?</a>
                             <input class="single-input" name="LessonLink" id="LessonLink" required>
                         </div>
                     </div>

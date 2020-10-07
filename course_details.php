@@ -246,7 +246,7 @@
                   
                   <div class="comment-form">
                      <h4>Add Your Feedback</h4>
-                     <form class="form-contact comment_form" method="post" action="new_comment.php" id="commentForm">
+                     <form class="form-contact comment_form" method="post" action="new_comment.php?course_id=<?php echo $courseCode ?>" id="commentForm">
                         <div class="row">
                            <div class="col-12">
                               <div class="form-group">

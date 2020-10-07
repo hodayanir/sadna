@@ -24,11 +24,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $resObj->response = "Fail";
         $resObj->msg = "Email already exists";
     } else {
-       $insert_query_students = "INSERT INTO $role (first_name, last_name, email, pass) VALUES ('$first_name', '$last_name', '$email', '$password');";
-        //$insert_query_students = "INSERT INTO students (first_name, last_name, email, country, address, phone, description, pass ) VALUES ('aaa', 'aaa' , 'aabcd@aa', 'f' , 'f' , 'f', 'ff', 'g');";
-        $res = mysqli_query($link, $insert_query_students);
-        $resObj->response = "Success";
-        $resObj->msg = "Register Succeed";
+       $insert_query_users = "INSERT INTO $role (first_name, last_name, email, pass) VALUES ('$first_name', '$last_name', '$email', '$password');";
+       $res = mysqli_query($link, $insert_query_users);
+       if ($role == "teachers"){
+           $insert_query_teachers ="CREATE TABLE IF NOT EXISTS `schedule$first_name` (
+                                    `id` int(10) NOT NULL ,
+                                    `username` varchar(20) NOT NULL,
+                                    `date` varchar(10) NOT NULL,
+                                    `time` float NOT NULL,
+                                    `duration` int(1) DEFAULT NULL,
+                                    `lessontype` varchar(10) DEFAULT NULL,
+                                    `paid` int(1) DEFAULT NULL);";
+           $res = mysqli_query($link, $insert_query_teachers);
+       }
+       $resObj->response = "Success";
+       $resObj->msg = "Register Succeed";
     }
 
     $myJSON = json_encode($resObj);
