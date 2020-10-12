@@ -5,8 +5,19 @@ $t_email = $_COOKIE['email'];
 //$first_name = $_COOKIE['first_name'];
 //$last_name = $_COOKIE['last_name'];
 
-$sql_query="SELECT country, address, phone, description, photo, teachers.first_name , teachers.last_name FROM teachers WHERE (email='$t_email') 
-            UNION SELECT country, address, phone, description, photo, students.first_name, students.last_name FROM students WHERE (email='$t_email');";
+if ($_COOKIE['user_type'] == "students" )
+    {
+        
+        $sql_query="SELECT country, address, phone, description, photo, students.first_name, students.last_name FROM students WHERE (email='$t_email');";
+        
+    }
+
+else {
+    $sql_query="SELECT country, address, phone, description, photo, teachers.first_name , teachers.last_name,linkedin,facebook,twitter,zoom FROM teachers WHERE (email='$t_email');";
+    
+}
+
+
 $res = mysqli_query($link, $sql_query);
 $res=mysqli_query($link, $sql_query);
 if (mysqli_num_rows($res) > 0) {
@@ -17,8 +28,19 @@ if (mysqli_num_rows($res) > 0) {
     $description = $row[3];
     $first_name = $row[5];
     $last_name = $row[6];
+    
+    if ($_COOKIE['user_type'] == "teachers" )
+    {
+        
+    $linkedin = $row[7];
+    $facebook = $row[8];
+    $twitter = $row[9];
+    $zoom = $row[10];
+        
+    }
 
 }
+
 ?>
 
 <!doctype html>
@@ -82,7 +104,7 @@ if (mysqli_num_rows($res) > 0) {
     <section class="contact-section">
         <div class="container">
             <form class="form-contact contact_form" action="updateTeacher.php" method="post" id="addLesson">
-                <div class="col-6">
+                <div class="col-8">
                     <div class="row mt-4">
                         <div class="col-12">
                             <h5>First Name</h5>
@@ -97,22 +119,56 @@ if (mysqli_num_rows($res) > 0) {
                     </div>
                     <div class="row mt-4">
                         <div class="col-12">
-                            <h5>country</h5>
+                            <h5>Country</h5>
                             <input class="single-input" name="country" id="country" value="<?php echo $country ?>">
                         </div>
                     </div>
                     <div class="row mt-4">
                         <div class="col-12">
-                            <h5>address</h5>
+                            <h5>Address</h5>
                             <input class="single-input" name="address" id="address" value="<?php echo $address ?>">
+                        </div>
+                    </div>
+                  <div class="row mt-4">
+                        <div class="col-12">
+                            <h5>Phone</h5>
+                            <input class="single-input" name="phone" id="phone" value="<?php echo $phone ?>">
+                        </div>
+                    </div>
+                    <?php if ($_COOKIE['user_type'] == "teachers" ){?>
+                  <div class="row mt-4">
+                        <div class="col-12">
+                            <h5>Facebook</h5>
+                            <input class="single-input" name="facebook" id="facebook" value="<?php echo $facebook?>">
                         </div>
                     </div>
                     <div class="row mt-4">
                         <div class="col-12">
-                            <h5>description</h5>
+                            <h5>Linkedin</h5>
+                            <input class="single-input" name="linkedin" id="linkedin" value="<?php echo $linkedin?>">
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <h5>Twitter</h5>
+                            <input class="single-input" name="twitter" id="twitter" value="<?php echo $twitter?>">
+                        </div>
+                    </div>
+                   <div class="row mt-4">
+                        <div class="col-12">
+                            <h5 style=display:inline-block>Zoom</h5><a href="assets/pdf/how to copy zoom meeting link to TMO pdf.pdf" target="_blank" class="genric-btn primary-border small" style=float:right>Help?</a>
+                            <input class="single-input" name="zoom" id="zoom" value="<?php echo $zoom?>">
+                        </div>
+                    </div>
+                    
+                    <?php    } ?>
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <h5>Description</h5>
                             <textarea class="single-input" name="description"><?php echo $description ?></textarea>
                         </div>
                     </div>
+
                     <div class="row mt-5">
                         <div class="col-6">
                             <button type="submit" class="button button-contactForm boxed-btn">Update</button>

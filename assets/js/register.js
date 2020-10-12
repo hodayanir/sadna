@@ -12,6 +12,7 @@ $("#registerForm").submit(function (e) {
     if (pass == confirm) {
         validateForm = true;
     }
+
     if (validateForm) {
         $.ajax({
             type: "POST",
@@ -19,8 +20,17 @@ $("#registerForm").submit(function (e) {
             data: form.serialize(), // serializes the form's elements.
             success: function (data) {
                 data = JSON.parse(data)
-                if (data['response'] === "Success") {
-                    window.location = "/success.php";
+                if(data['response'] === "Success") {
+
+                    let link = '/index.html'
+                    if (data['user_type'] === 'teachers') {
+                        link = '/teacherDashboard.php'
+                    }
+
+                    if (data['user_type'] === 'students') {
+                        link = '/studentDashboard.php'
+                    }
+                    window.location = link;
                 }
                 if (data['response'] === "Fail") {
                     $('#formError').removeClass('text-hide')

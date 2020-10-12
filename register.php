@@ -37,8 +37,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     `paid` int(1) DEFAULT NULL);";
            $res = mysqli_query($link, $insert_query_teachers);
        }
+
+            setcookie('email',$email );
+            setcookie('first_name', $first_name);
+            setcookie('last_name', $last_name);
+            setcookie('user_type', $role);
+
        $resObj->response = "Success";
        $resObj->msg = "Register Succeed";
+       $resObj->user_type = $role;
     }
 
     $myJSON = json_encode($resObj);
@@ -46,34 +53,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 }
 
-//$from = "tmo.s3345@gmail.com";
-//#send email #
-//$headers = "From: $from";
-//$headers = "From: " . $from . "\r\n";
-//$headers .= "Reply-To: " . $from . "\r\n";
-//$headers .= "MIME-Version: 1.0\r\n";
-//$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-//
-//$subject = "Thank you for registering us as a $role.";
-//
-//$logo = 'img/logo.png';
-//$link = '#';
-//
-//$body = "<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><title>Express Mail</title></head><body>";
-//$body .= "<table style='width: 100%;'>";
-//$body .= "<thead style='text-align: center;'><tr><td style='border:none;' colspan='2'>";
-//$body .= "<a href='{$link}'><img src='{$logo}' alt=''></a><br><br>";
-//$body .= "</td></tr></thead><tbody><tr>";
-//$body .= "<td style='border:none;'><strong>Name:</strong> {$first_name}</td>";
-//$body .= "<td style='border:none;'><strong>Email:</strong> {$from}</td>";
-//$body .= "</tr>";
-//$body .= "<tr><td style='border:none;'><strong>Subject:</strong> {$subject}</td></tr>";
-//$body .= "<tr><td></td></tr>";
-//$body .= "<tr><td colspan='2' style='border:none;'>{$message}</td></tr>";
-//$body .= "</tbody></table>";
-//$body .= "</body></html>";
-//
-//$send = mail($email, $subject, $body, $headers);
 ?>
 
 

@@ -3,7 +3,7 @@ include "mysqlConfig.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $c_name = $_POST["courseName"];
-    $c_desc = $_POST["courseDes"];
+    $c_desc = $_REQUEST["courseDes"];
     $c_tag = $_POST["courseTags"];
     $t_email = $_COOKIE['email'];
     $resObj = new stdClass();

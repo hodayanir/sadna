@@ -106,7 +106,7 @@ function ShowTheDay(date,teacher,dayofweek) {
       Hide('loading');
       // Make response hold the response text from showtheday.php:
       var response = this.responseText;
-      // Make thisday an array of all lessons on the day. Each lesson is defined by student/s, time and duration:
+      // Make this day an array of all lessons on the day. Each lesson is defined by student/s, time and duration:
       thisday = response.split("&");
       // Make all lessons visible and remove any previous grid properties:
       for (var i = 6; i <= 22.5; i+=0.5) ResetLesson(i,dayofweek);

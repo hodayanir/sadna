@@ -17,13 +17,12 @@ $res=mysqli_query($link, $insert_query_contact);
 
 #send email #
 
-    $headers = "From: $from";
 	$headers = "From: " . $from . "\r\n";
-	$headers .= "Reply-To: ". $from . "\r\n";
+	$headers .= "Reply-To: ". $email . "\r\n";
 	$headers .= "MIME-Version: 1.0\r\n";
 	$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-
-    $subject = "Your request has been received by the TMO SYSTEM team and will be processed as soon as possible.";
+    $subject = "TMO | Your request has been received";
+    $message = "Your request has been received by the TMO SYSTEM team and will be processed as soon as possible.";
 
     $logo = 'img/logo.png';
     $link = '#';
@@ -34,7 +33,7 @@ $res=mysqli_query($link, $insert_query_contact);
 	$body .= "<a href='{$link}'><img src='{$logo}' alt=''></a><br><br>";
 	$body .= "</td></tr></thead><tbody><tr>";
 	$body .= "<td style='border:none;'><strong>Name:</strong> {$name}</td>";
-	$body .= "<td style='border:none;'><strong>Email:</strong> {$from}</td>";
+	$body .= "<td style='border:none;'><strong>Email:</strong> {$email}</td>";
 	$body .= "</tr>";
 	$body .= "<tr><td style='border:none;'><strong>Subject:</strong> {$subject}</td></tr>";
 	$body .= "<tr><td></td></tr>";

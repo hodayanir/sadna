@@ -163,22 +163,7 @@
 
                      </div>
                   </div>
-                  <div class="navigation-top">
-                     <div class="d-sm-flex justify-content-between text-center">
-                        <p class="like-info"><span class="align-middle"><i class="fa fa-heart"></i></span> Lily and 4
-                           people like this</p>
-                        <div class="col-sm-4 text-center my-2 my-sm-0">
-                           <!-- <p class="comment-count"><span class="align-middle"><i class="fa fa-comment"></i></span> 06 Comments</p> -->
-                        </div>
-                        <ul class="social-icons">
-                           <li><a href="https://www.facebook.com/sai4ull"><i class="fab fa-facebook-f"></i></a></li>
-                           <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                           <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
-                           <li><a href="#"><i class="fab fa-behance"></i></a></li>
-                        </ul>
-                     </div>
 
-                  </div>
                  
                   <div class="blog-author">
                      <?php $sql_query="SELECT description,first_name,last_name, photo FROM teachers WHERE (email='$teacherEmail')";
@@ -189,13 +174,16 @@
                             $first_name = $row[1];
                             $last_name = $row[2];
                             $photo = $row[3];
+                            
+                            if ($photo == NULL)
+                            $photo='assets/img/profile_picture.png';
                         }
                      ?>
             
             <div class="media align-items-center"> 
                      <img src="<?php echo $photo ?>" alt="">
                         <div class="media-body">
-                           <a href="#">
+                           <a href="/instructor.php">
                               <h4><?php echo ucfirst($first_name) , " ", ucfirst($last_name) ?></h4> 
                            </a>
                            <p><?php echo ucfirst($description) ?></p>
@@ -211,7 +199,10 @@
                     if ( $res->num_rows==0){
                         echo " Be the ";echo "<span style='color: red;' /><strong>first</strong></span>"; echo " to comment on this course!";
                     }
-                      while($row = mysqli_fetch_assoc($res)){?>
+                      while($row = mysqli_fetch_assoc($res)){
+                      if ($row['photo'] == NULL)
+                            $photo='assets/img/profile_picture.png';
+                        else $photo = $row['photo'];?>
                       
                      <div class="comment-list">
                         <div class="single-comment justify-content-between d-flex">

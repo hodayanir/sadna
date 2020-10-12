@@ -75,21 +75,23 @@ while ($row = mysqli_fetch_assoc($res)) {
     </div>
     <!-- Hero End -->
     <!-- ================ Login section start ================= -->
-    <section class="contact-section">
+
         <div class="container">
+            <div class="section-top-border">
+                <h4 class="mb-30"><strong><span>Update Your Course:</strong></span></h4>    
             <form class="form-contact contact_form" action="updateCourse.php" method="post" id="createCourse">
                 <input type="hidden" name="courseCode" id="courseCode" value= <?php echo $courseCode ?> >
                 <div class="col-6">
                     <div class="row mt-4">
                         <div class="col-12">
-                            <h5>Course name</h5>
+                            <h5>Course Name</h5>
                             <input class="single-input" name="courseName" id="name"
                                    placeholder="Enter course name" value="<?php echo $courseName ?>" required>
                         </div>
                     </div>
                     <div class="row mt-4">
                         <div class="col-12">
-                            <h5>Enter course description</h5>
+                            <h5>Enter Course Description</h5>
                             <textarea class="single-input" name="courseDes" id="courseDes"
                                       placeholder="Enter course description"
                                       required><?php echo $courseDescription ?> </textarea>
@@ -102,31 +104,52 @@ while ($row = mysqli_fetch_assoc($res)) {
                     </div>
                 </div>
             </form>
+            <br>
+             <div class="section-top-border">
             <div class="row mt-5">
                 <div class="col-9">
-                    <h2>Course's Lessons</h2>
+                    <h4 class="mb-30"><strong><span>Course's Lessons:</strong></span></h4>
                 </div>
                 <div class="col-3">
                     <a href="createLessonUI.php?course_id=<?php echo $courseCode ?>"
-                       class="float-right genric-btn primary-border e-large">Add Lesson</a>
+                       class="float-right button button-contactForm boxed-btn">Add Lesson</a>
                 </div>
             </div>
-            <div class="row mt-4">
-                <div class="col-12">
-                    <ul>
-                        <?php foreach ($lessons as $row) { ?>
-                            <li>
-                                <h4>
-                                    <span><i class="ti-time"></i> <?php echo $row['lessonLength'] ?> </span>
-                                    <a class="color-blue"
-                                       href="/updateLessonUI.php?lesson_id=<?php echo $row['lessonCode'] ?>"><?php echo $row['lessonName'] ?></a>
-                                </h4>
+            
+           
 
-                            </li>
-                        <?php } ?>
-                    </ul>
-                </div>
-            </div>
+
+                                    
+                                    <div class="col-10">
+                                    <div class="progress-table-wrap">
+                                        <div class="progress-table">
+                                            <div class="table-head">
+                                                <div class="serial">#</div>
+                                                <div class="visit">Lesson Lenght</div>
+                                                <div class="visit">Lesson Name</div>
+                                            </div>
+
+
+                                            
+                                            <?php foreach ($lessons as $row) { 
+                                            $lesson_code = $row['lessonCode'];
+                                            $edit ="/updateLessonUI.php?lesson_id=$lesson_code";
+                                            ?>
+                                                <div class="table-row">
+                                                    <div class="serial">#</div>
+                                                    <div class="visit"> <span> <?php echo $row['lessonLength'] ?> </span></div>
+                                                  
+                                                    <div class="percentage">  <?php echo $row['lessonName'] ?></div>
+                                                    <div class="visit"><a href="<?php echo $edit;?>"> Edit </a></div>
+                                                </div>
+                                            <?php } ?>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                </div>
+
         </div>
 
         </div>

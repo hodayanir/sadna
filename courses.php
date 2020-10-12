@@ -97,23 +97,34 @@
                                              
                                             <div class="single-course mb-70">
                                                 <div class="course-img">
-                                                     <?php if ($row['tag'] == "Art"){
-                                                    echo '<img src="assets/img/course/Art.jpg'.$photo->name.'"/>';
-                                                     }
-                                                    if ($row['tag'] == "Biology"){
-                                                         echo '<img src="assets/img/course/biology.png'.$photo->name.'"/>';}
-                                                    if ($row['tag'] == "Chemistry"){
-                                                         echo '<img src="assets/img/course/chemistry.jpg'.$photo->name.'"/>';}
-                                                    if ($row['tag'] == "Economics"){
-                                                         echo '<img src="assets/img/course/economics.jpg". width="400" height="255"/>';}
-                                                    if ($row['tag'] == "Language"){
-                                                         echo '<img src="assets/img/course/language.jpg'.$photo->name.'"/>';}
-                                                    if ($row['tag'] == "Mathematics"){
-                                                         echo '<img src="assets/img/course/mathematics.jpeg'.$photo->name.'"/>';}
-                                                    if ($row['tag'] == "Photography"){
-                                                         echo '<img src="assets/img/course/photography.jpg'.$photo->name.'"/>';}
+                                                     <?php if ($row['tag'] == "Art"){?>
+                                                    <a href="/course_details.php?course_id=<?php echo $row['courseCode']?>"><img src="assets/img/course/Art.jpg" /></a>
+                                                    
+                                                   <?php  }?>
+                                                   <?php if ($row['tag'] == "Biology"){?>
+                                                   
+                                                   <a href="/course_details.php?course_id=<?php echo $row['courseCode']?>"><img src="assets/img/course/biology.png" /></a>
+                                                            
+                                                    <?php } ?>
+                                                   <?php if ($row['tag'] == "Chemistry"){?>
+                                                        <a href="/course_details.php?course_id=<?php echo $row['courseCode']?>"><img src="assets/img/course/chemistry.jpg" /></a>
+
+                                                        
+                                                    <?php } ?>
+                                                  <?php  if ($row['tag'] == "Economics"){?>
+                                                  <a href="/course_details.php?course_id=<?php echo $row['courseCode']?>"><img src="assets/img/course/economics.jpg" /></a>
+                                                    <?php } ?>
+                                                  <?php  if ($row['tag'] == "Language"){?>
+                                                  <a href="/course_details.php?course_id=<?php echo $row['courseCode']?>"><img src="assets/img/course/language.jpg" /></a>
+                                                   <?php }?>
+                                                  <?php  if ($row['tag'] == "Mathematics"){?>
+                                                  <a href="/course_details.php?course_id=<?php echo $row['courseCode']?>"><img src="assets/img/course/mathematics.jpeg" /></a>
+                                                    <?php }?>
+                                                  <?php  if ($row['tag'] == "Photography"){?>
+                                                  <a href="/course_details.php?course_id=<?php echo $row['courseCode']?>"><img src="assets/img/course/photography.jpg" /></a>
+
+                                                    <?php } ?>
                                                      
-                                                     ?>
 
                                                 </div>
                                                 <div class="course-caption">
@@ -121,13 +132,7 @@
                                                         <h4><a href="/course_details.php?course_id=<?php echo $row['courseCode']?>"><?php echo $row['name']?></a></h4>
                                                     </div>
                                                     <div class="course-cap-mid d-flex justify-content-between">
-                                                        <div class="course-ratting">
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                        </div>
+
                                                         <ul>
                                                             <li> <?php echo $row['tag']?>  </li>
                                                         </ul>

@@ -90,13 +90,12 @@ $res_private = mysqli_query($link, $sql_query_private_l);
                     <span>Welcome, <?php echo $_COOKIE['first_name'], " ", $_COOKIE['last_name'] ?>!</span></h5>
                 <div class="row">
                     <div class="col-9">
-                        <h2><strong>Continue Watch Your Courses</strong></h2>
+                        <h2><strong>Watch Your Courses</strong></h2>
                     </div>
                     <div class="col-3">
                         <div class="col-12">
-                            <a href="schedule/schedule.php"
-                               class="float-right genric-btn primary-border e-large"><strong><strong>+ Private
-                                        Lesson</strong></strong></a>
+                            <a href="/courses.php"
+                               class="float-right genric-btn primary-border e-large"><strong><strong>Find New Course</strong></strong></a>
                         </div>
                     </div>
                 </div>
@@ -123,28 +122,33 @@ $res_private = mysqli_query($link, $sql_query_private_l);
                                                                     <!-- Single course -->
                                                                     <div class="single-course mb-70">
                                                                         <div class="course-img">
-                                                                            <?php if ($row['tag'] == "Art") {
-                                                                                echo '<img src="assets/img/course/Art.jpg' . $photo->name . '"/>';
-                                                                            }
-                                                                            if ($row['tag'] == "Biology") {
-                                                                                echo '<img src="assets/img/course/biology.png' . $photo->name . '"/>';
-                                                                            }
-                                                                            if ($row['tag'] == "Chemistry") {
-                                                                                echo '<img src="assets/img/course/chemistry.jpg' . $photo->name . '"/>';
-                                                                            }
-                                                                            if ($row['tag'] == "Economics") {
-                                                                                echo '<img src="assets/img/course/economics.jpg' . $photo->name . '"/>';
-                                                                            }
-                                                                            if ($row['tag'] == "Language") {
-                                                                                echo '<img src="assets/img/course/language.jpg' . $photo->name . '"/>';
-                                                                            }
-                                                                            if ($row['tag'] == "Mathematics") {
-                                                                                echo '<img src="assets/img/course/mathematics.jpeg' . $photo->name . '"/>';
-                                                                            }
-                                                                            if ($row['tag'] == "Photography") {
-                                                                                echo '<img src="assets/img/course/photography.jpg' . $photo->name . '"/>';
-                                                                            }
-                                                                            ?>
+                                                                            <?php if ($row['tag'] == "Art"){?>
+                                                                                <a href="/watchCourseUI.php?<?php echo "courseCode={$row['courseCode']}" ?>"><img src="assets/img/course/Art.jpg" /></a>
+                                                                                
+                                                                               <?php  }?>
+                                                                               <?php if ($row['tag'] == "Biology"){?>
+                                                                               
+                                                                               <a href="/watchCourseUI.php?<?php echo "courseCode={$row['courseCode']}" ?>"><img src="assets/img/course/biology.png" /></a>
+                                                                                        
+                                                                                <?php } ?>
+                                                                               <?php if ($row['tag'] == "Chemistry"){?>
+                                                                                    <a href="/watchCourseUI.php?<?php echo "courseCode={$row['courseCode']}" ?>"><img src="assets/img/course/chemistry.jpg" /></a>
+                            
+                                                                                    
+                                                                                <?php } ?>
+                                                                              <?php  if ($row['tag'] == "Economics"){?>
+                                                                              <a href="/watchCourseUI.php?<?php echo "courseCode={$row['courseCode']}" ?>"><img src="assets/img/course/economics.jpg" /></a>
+                                                                                <?php } ?>
+                                                                              <?php  if ($row['tag'] == "Language"){?>
+                                                                              <a href="/watchCourseUI.php?<?php echo "courseCode={$row['courseCode']}" ?>"><img src="assets/img/course/language.jpg" /></a>
+                                                                               <?php }?>
+                                                                              <?php  if ($row['tag'] == "Mathematics"){?>
+                                                                              <a href="/watchCourseUI.php?<?php echo "courseCode={$row['courseCode']}" ?>"><img src="assets/img/course/mathematics.jpeg" /></a>
+                                                                                <?php }?>
+                                                                              <?php  if ($row['tag'] == "Photography"){?>
+                                                                              <a href="/watchCourseUI.php?<?php echo "courseCode={$row['courseCode']}" ?>"><img src="assets/img/course/photography.jpg" /></a>
+                            
+                                                                                <?php } ?>
                                                                         </div>
                                                                         <div class="course-caption">
                                                                             <div class="course-cap-top">
@@ -164,9 +168,24 @@ $res_private = mysqli_query($link, $sql_query_private_l);
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="section-top-border">
-                                    <h3 class="mb-30"><strong>Next Private Lessons:</strong></h3>
+                  
+                  <div class="section-top-border">
+                      <br>
+                      <br>
+                  <div class="row">
+                    
+                                    <div class="col-9">
+                                    <h3 class="mb-30"><strong>Private Lessons:</strong></h3>
+                                    </div>
+                         <div class="col-3">
+                        <div class="col-12">
+                            <a href="schedule/schedule.php"
+                               class="float-right genric-btn primary-border e-large"><strong><strong>+ Private
+                                        Lesson</strong></strong></a>
+                             </div>
+                            </div>
+                                    </div>
+                                    <br>
                                     <div class="progress-table-wrap">
                                         <div class="progress-table">
                                             <div class="table-head">
@@ -180,14 +199,20 @@ $res_private = mysqli_query($link, $sql_query_private_l);
 
 
                                             <?php
-                                            while ($row_private = mysqli_fetch_assoc($res_private)) { ?>
+                                            
+                                            while ($row_private = mysqli_fetch_assoc($res_private)) {
+                                            $zoom =$row_private['zoom'];?>
+                                            
                                                 <div class="table-row">
                                                     <div class="serial">#</div>
                                                     <div class="visit"> <?php echo $row_private['tFirstName'] ?></div>
                                                     <div class="visit"> <?php echo $row_private['tLastName'] ?></div>
                                                     <div class="visit"><?php echo $row_private['pLessonTime'] ?></div>
-                                                    <div class="visit"><?php echo $row_private['pLessonDate'] ?></div>
-                                                    <div class="visit"><?php echo $row_private['zoom'] ?></div>
+                                                     <div class="visit"><?php echo $row_private['pLessonDate'] ?></div>
+                                                    <div class="visit"><a href="<?php echo $zoom;?>"> Enter Meeting </a></div>
+                                                    
+                                                    
+                                
                                                 </div>
                                             <?php } ?>
                                         </div>

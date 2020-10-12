@@ -1,7 +1,7 @@
 <?php
     include "mysqlConfig.php";
 
-    $sql_query="SELECT first_name,last_name, photo FROM teachers";
+    $sql_query="SELECT first_name,last_name, photo, linkedin, facebook, twitter FROM teachers";
     
     $res=mysqli_query($link, $sql_query);
     
@@ -95,9 +95,9 @@
                             ?>
                             <!-- Blog Social -->
                             <ul class="team-social">
-                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fas fa-globe"></i></a></li>
+                                <li><a href="<?php echo ucfirst($row['facebook'])?>"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="<?php echo ucfirst($row['twiter'])?>"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="<?php echo ucfirst($row['linkedin'])?>"><i class="fab fa-linkedin-in"></i></a></li>
                             </ul>
                         </div>
                         <div class="team-caption">

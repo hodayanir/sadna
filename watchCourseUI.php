@@ -88,7 +88,7 @@ while ($row = mysqli_fetch_assoc($res)) {
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="hero-cap hero-cap2 text-center">
-                            <h2><?php echo $courseName ?></h2>
+                           <h2><srong><?php echo $courseName ?></srong></h2>
                         </div>
                     </div>
                 </div>
@@ -103,9 +103,9 @@ while ($row = mysqli_fetch_assoc($res)) {
                 <div class="col-8">
                     <div class="row">
                         <div class="col-12">
-                            <h1>
+                            <h2><strong>
                                 <?php echo $currentLessonName ?>
-                            </h1>
+                          </strong></h2>
                         </div>
                     </div>
                     <div class="row">
@@ -119,24 +119,31 @@ while ($row = mysqli_fetch_assoc($res)) {
                     </div>
                 </div>
                 <div class="col-4">
+                    <br><br>
                     <div class="row">
-                        <h1>
+                        
+                        <h3><strong>
                             Lessons
-                        </h1>
+                       </strong> </h3>
                     </div>
+                    
                     <div class="row">
+                        
+                        <blockquote class="generic-blockquote">
                         <ul>
                             <?php foreach ($lessons as $row) { ?>
                                 <li>
-                                    <h4>
-                                        <span><i class="ti-time"></i> <?php echo $row['lessonLength'] ?> </span>
+                                    <h5>
+                                        <span><i class="ti-time"></i> <?php echo $row['lessonLength'] ?> - </span>
                                         <a class="color-blue"
                                            href="/watchCourseUI.php?<?php echo "lessonCode={$row['lessonCode']}&courseCode={$row['courseCode']}" ?>"><?php echo $row['lessonName'] ?></a>
-                                    </h4>
-
+                                    </h5>
+                                    <br>
                                 </li>
                             <?php } ?>
                         </ul>
+                        </blockquote>
+                        
                     </div>
                 </div>
             </div>

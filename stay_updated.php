@@ -6,7 +6,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $c_id = $_POST["courseCode"];
     $resObj = new stdClass();
+
     
+
     if(empty($email)){
                 echo"<script>
                 if (window.confirm('You are not logged in! Would you like to move to the login page?'))
@@ -90,9 +92,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
 
 } 
-        
-        
+
+
 }
+
+
+       
+    
     
     
 
