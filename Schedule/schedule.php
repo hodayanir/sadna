@@ -30,14 +30,7 @@ $username = $_COOKIE["first_name"];
     <div id="welcomecontainer">
       <span class="headline">Welcome <?php echo "{$username}!"; ?></span>
       <br>
-      <span><?php
-  if($admin){
-    echo '<br><a href="admin.php" class="somebutton redfont redhover">Administrator</a>';
-  }
-   ?></span>
-      <!--
-      <span id="nextlessoncaption">Your next lesson is at:</span>
-      -->
+
     </div>
   </div>
   <div id="calendar" class="bottom-gray-border">

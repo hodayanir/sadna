@@ -4,17 +4,14 @@
     session_start();
 include "../mysqlConfig.php";
   
-
-
 // Declare variables:
 $user = $_COOKIE["first_name"];
-$student_email = $_COOKIE["email"];
 $date = $_GET['date'];
 $time = $_GET['time'];
 $teacher = $_GET['teacher'];
 $duration = $_GET['duration'];
 $lessontype = $_GET['lessontype'];
-
+$student_email = $_COOKIE["email"];
 
 // Only run with valid input:
 if ($user && $date && $time && $teacher){
@@ -32,16 +29,19 @@ if ($user && $date && $time && $teacher){
     // Create lesson if it doesn't conflict:
     else
     {
-        $sql3 = "insert into privateLessons (pLessonDate, pLessonTime, studentEmail, teacherEmail) values('$date', '$time', '$student_email', '$teacher');";
-        $result3 = mysqli_query($link, $sql3);
-
+        
         $sql1 = "INSERT INTO schedule{$teacher} (username, date, time, duration, lessontype, paid) VALUES ('$user', '$date', '$time', '$duration', '$lessontype', 0)";
 
         if (mysqli_query($link, $sql1)) {
             echo "A <b>{$lessontype}</b> lesson of <b>{$duration} hour";
             if ($duration > 1) echo "s";
             echo "</b><br> is now scheduled for <b>{$user} </b>with <b>{$teacher}</b><br>on <b>{$date}</b> at <b>{$time}:00</b> o'clock.";
-
+            
+            //adds new lesson to the table privateLessons
+            $sql3 = "insert into privateLessons (pLessonDate, pLessonTime, studentEmail, teacherEmail) values('$date', '$time', '$student_email', '$teacher')";
+            $result3 = mysqli_query($link, $sql3);
+            
+            // sending email to the teacher
             $sql2 = "SELECT email FROM teachers WHERE first_name = '$teacher'";
             $result = mysqli_query($link, $sql2);
 
@@ -54,7 +54,7 @@ if ($user && $date && $time && $teacher){
             $retval = mail($to,$subject,$txt,$headers);
             
             if( $retval == true ) {
-            echo "<br><br>A confirmation email will be sent once the lesson will be approved by the teacher.";
+            echo "<br><br>A confirmation email was sent to the teacher.";
             }else {
             echo "<br><br>Message could not be sent to {$teacher}.";
             }

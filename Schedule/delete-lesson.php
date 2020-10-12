@@ -1,33 +1,18 @@
 <?php
-/*
-    //Check if admin:
-    session_start();
-    if(!(isset($_SESSION['admin']))){
-        header('Location: index.php');
-    }
-*/  
-    //Connect to the database:
-    session_start();
-    $conn_server = $_SESSION['CONNECTION_SERVER'];
-    $conn_user = $_SESSION['CONNECTION_USER'];
-    $conn_password = $_SESSION['CONNECTION_PASSWORD'];
-    $database = $_SESSION['CONNECTION_DATABASE'];
 
-    $conn = mysqli_connect($conn_server,$conn_user,$conn_password,$database);
-    if (!$conn) {die('Could not connect: ' . mysqli_error($conn));}
-    
-    //Delete from database:
-    $student = $_GET['student'];
-    $time = $_GET['time'];
-    $date = $_GET['date'];
-    $teacher = $_GET['teacher'];
+include "../mysqlConfig.php";
 
-    $sql = "DELETE FROM schedule{$teacher} WHERE username = '{$student}' AND time = $time AND date = '{$date}'";
+$date = $_GET['date'];
+$time = $_GET['time'];
+$teacher = $_GET['teacher'];
+$student_email = $_COOKIE["email"];
+$sfirstname = $_COOKIE["first_name"];
+
+
+    $sql1 = "DELETE FROM schedule{$teacher} WHERE time = '$time' AND date = '$date' AND username = '$sfirstname'";
+    $sql2 = "DELETE FROM privateLessons WHERE studentEmail = '{$student_email}'AND teacherEmail = '$teacher'  AND pLessonTime = '$time' AND pLessonDate = '{$date}'";
+
     
-    if (mysqli_query($conn, $sql)) echo "Lesson deleted successfully!";
     
-    else echo "Error:<br>" . $sql . "<br>" . mysqli_error($conn);
-   
-    //Disconnect:
-    mysqli_close($conn);
+    mysqli_close($link);
 ?>
