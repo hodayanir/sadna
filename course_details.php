@@ -201,15 +201,17 @@
                     }
                       while($row = mysqli_fetch_assoc($res)){
                       if ($row['photo'] == NULL)
+                      {
                             $photo='assets/img/profile_picture.png';
-                        else $photo = $row['photo'];?>
+                      }
+                        else { $photo = $row['photo'];}?>
                       
                      <div class="comment-list">
                         <div class="single-comment justify-content-between d-flex">
                            <div class="user justify-content-between d-flex">
                               <div class="thumb">
                                  
-                                 <img src="<?php echo $row['photo'] ?>" alt="">
+                                 <img src="<?php echo $photo ?>" alt="">
                                  
                               </div>
                               <div class="desc">
